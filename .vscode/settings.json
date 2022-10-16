@@ -1,0 +1,11 @@
+{
+	"files.associations": {
+		"bitset": "cpp",
+		"functional": "cpp",
+		"iosfwd": "cpp",
+		"locale": "cpp",
+		"string": "cpp",
+		"string_view": "cpp",
+		"iterator": "cpp"
+	}
+}

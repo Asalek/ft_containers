@@ -5,5 +5,8 @@ int main()
 {
 	Vector<int> tupf;
 
-	cout << tupf.size << endl;
+	tupf.vectr[0] = 192;
+	cout << tupf.vectr[0] << endl;
+	cout << tupf.vectr[1] << endl;
+	cout << tupf.vectr[2] << endl;
 }

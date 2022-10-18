@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/18 07:42:28 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/18 08:31:57 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ namespace ft
 			typedef	T*						pointer;
 			typedef	const T*				const_pointer;
 			size_t							size_type;
-			T*								vectr;
 		//member types
 //vectr = _alloc.allocate(3);
 // alloc.deallocate(pointer, 3);
@@ -41,7 +40,7 @@ namespace ft
 			{
 				vectr = _alloc.allocate(0);
 			};
-			Vector(int size, int value)
+			Vector(unsigned long size, unsigned long value)
 			{
 				vectr = _alloc.allocate(size);
 				size_type = size;
@@ -52,22 +51,23 @@ namespace ft
 				}
 			}
 			//Member Functions
-			void	resize(int	new_size)
+			void	resize(unsigned long	new_size)
 			{
 				if (new_size <= _alloc.max_size())
-				{
-					vectr = _alloc.allocate(new_size);
-				}
-				else
-					throw length_error();
+					vectr = _alloc.allocate(new_size); // allocate in case of bad allocation it throws bad allocation exception
 			}
-			class length_error : public std::logic_error
+			
+			//Operators
+			reference operator[] (unsigned long n)
 			{
-				public:
-					explicit length_error (const string& what_arg);
-			};
+				if (n < 0 || n > this->size_type)
+					return vectr[size_type + 1];
+				else
+					return vectr[n];
+			}
 			private:
 				allocator_type							_alloc;
+				T*										vectr;
 	};
 };
 

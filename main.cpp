@@ -5,8 +5,14 @@ int main()
 {
 	Vector<string> tupf;
 
-	tupf.vectr[0] = "192";
-	cout << tupf.vectr[0] << endl;
-	cout << tupf.vectr[1] << endl;
-	cout << tupf.size_type << endl;
+	tupf[-1] = "9999";
+	cout << tupf[-1] << endl;
+	try
+	{
+		tupf.resize(87945632549863);
+	}
+	catch (std::bad_alloc &allocation)
+	{
+		std::cerr << "bad_alloc caught: " << allocation.what() << '\n';
+	}
 }

@@ -6,16 +6,14 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/18 11:54:06 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/20 05:51:57 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <iterator>
-#include <cstddef>
-
+#include "iterators.hpp"
 #include <iostream>
 
 using	std::cout;
@@ -36,14 +34,13 @@ namespace ft
 			typedef	T*						pointer;
 			typedef	const T*				const_pointer;
 			size_t							size_type;
-		//member types
-//vectr = _alloc.allocate(3);
-// alloc.deallocate(pointer, 3);
+			typedef	ft::Container<T>			iter;
 
 			//Connstructors & Destructor
 			Vector():size_type(0)
 			{
 				vectr = _alloc.allocate(0);
+				capacity = 0;
 			};
 			Vector(Vector &ve)
 			{
@@ -62,8 +59,7 @@ namespace ft
 			{
 				if (new_size <= _alloc.max_size())
 				{
-					vectr = _alloc.allocate(new_size); // allocate in case of bad allocation it throws bad allocation exception
-					size_type = new_size;
+					
 				}
 				else{}
 			}
@@ -97,33 +93,8 @@ namespace ft
 				allocator_type							_alloc;
 				T*										vectr;
 				unsigned	long						i;
+				unsigned	long						capacity;
 	};
-
-	struct Iterator{
-		using iterator_category = std::forward_iterator_tag;
-		using difference_type = std::ptrdiff_t;
-		using value_type = int;
-		using pointer = int*;
-		using reference = int&;
-
-		// Iterator tags here...
-		Iterator(pointer ptr) : m_ptr(ptr) {}
-		pointer m_ptr;
-		// Iterator constructors here...
-
-		reference operator*() const { return *m_ptr; }
-		pointer operator->() { return m_ptr; }
-
-		// Prefix increment
-		Iterator& operator++() { m_ptr++; return *this; }  
-
-		// Postfix increment
-		Iterator operator++(int) { Iterator tmp = *this; ++(*this); return tmp; }
-		friend bool operator== (const Iterator& a, const Iterator& b) { return a.m_ptr == b.m_ptr; };
-    	friend bool operator!= (const Iterator& a, const Iterator& b) { return a.m_ptr != b.m_ptr; };
-		Iterator begin() { return Iterator(&m_data[0]); }
-    	Iterator end()   { return Iterator(&m_data[200]); } // 200 is out of bounds
-	};
-};
+}
 
 #endif

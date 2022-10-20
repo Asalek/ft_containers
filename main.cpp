@@ -24,4 +24,5 @@ int main()
 	// 	std::cerr << "bad_alloc caught: " << allocation.what() << '\n';
 	// }
 	cout << vec.size() << endl;
+	return 0;
 }

@@ -17,11 +17,6 @@ int main()
 	catch(std::exception &e){
 		cout << e.what();
 	}
-
-	//iterator
-	ft::Vector<int>::iterator iter;
-	iter = vec2.begin();			//begin
-	cout << *iter << "  <---  iterator value\n";
 	
 	//fill container and display
 	vec[5] = 9999;		//if you over pass or set -1 as a value a reference to the end of container is returned
@@ -31,9 +26,18 @@ int main()
 	cout <<"3__" << vec[3] << endl;
 	cout <<"4__" << vec[4] << endl;
 
+	//iterator
+	ft::Vector<int>::iterator iter;
+	iter = vec.begin();			//begin
+	cout << *iter << "  <---  begin iterator value\n";
+	iter = vec.end();				//end
+	cout << *iter << "  <---  end iterator value\n";
+
+
 	//methods
 	cout << "front() : " << vec.front() << endl;
 	cout << "back() : " << vec.back() << endl;
 	cout << "size() : " << vec.size() << endl;
+	cout << "capacity() : " << vec.capacity() << endl;
 	return 0;
 }

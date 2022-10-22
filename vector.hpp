@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/22 05:24:34 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/22 22:39:00 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ namespace ft
 			reference		back() {return vectr[size_type - 1]; }
 			unsigned long	size() {return this->size_type; }
 			size_t			capacity() {return this->_capacity; }
+			size_t			max_size() {return _alloc.max_size(); }
+			bool			empty() {return this->size_type > 0 ? false : true; }
 
 			//Operators
 			reference operator[] (unsigned long n)

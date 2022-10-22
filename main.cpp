@@ -20,11 +20,11 @@ int main()
 	
 	//fill container and display
 	vec[5] = 9999;		//if you over pass or set -1 as a value a reference to the end of container is returned
-	cout <<"0__" << vec[0] << endl;
-	cout <<"1__" << vec[1] << endl;
-	cout <<"2__" << vec[2] << endl;
-	cout <<"3__" << vec[3] << endl;
-	cout <<"4__" << vec[4] << endl;
+	cout <<"vec[0]__" << vec[0] << endl;
+	cout <<"vec[1]__" << vec[1] << endl;
+	cout <<"vec[2]__" << vec[2] << endl;
+	cout <<"vec[3]__" << vec[3] << endl;
+	cout <<"vec[4]__" << vec[4] << endl;
 
 	//iterator
 	ft::Vector<int>::iterator iter;
@@ -35,9 +35,11 @@ int main()
 
 
 	//methods
-	cout << "front() : " << vec.front() << endl;
-	cout << "back() : " << vec.back() << endl;
-	cout << "size() : " << vec.size() << endl;
+	cout << "front() :    " << vec.front() << endl;
+	cout << "back() :     " << vec.back() << endl;
+	cout << "size() :     " << vec.size() << endl;
 	cout << "capacity() : " << vec.capacity() << endl;
+	cout << "max_size() : " << vec.max_size() << endl;
+	cout << "empty() :    " << vec.empty() << endl;
 	return 0;
 }

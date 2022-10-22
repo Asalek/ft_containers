@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/22 00:20:16 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/22 05:03:34 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ namespace ft
 		public:
 			typedef typename std::iterator<std::random_access_iterator_tag, Type>::difference_type difference_type;
 
-			random_Iter() : _ptr(nullptr) {std::cout << "A";}
-			random_Iter(Type* rhs) : _ptr(rhs) {std::cout << "B";}
+			random_Iter() : _ptr(nullptr) {}
+			random_Iter(Type* rhs) : _ptr(rhs) {}
 			// random_Iter(Type rhs) : _ptr(rhs) {std::cout << "C";}
 			random_Iter(const random_Iter &rhs) : _ptr(rhs._ptr) {}
 

@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/22 00:17:21 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/22 05:09:59 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ namespace ft
 				vectr = _alloc.allocate(0);
 			};
 			Vector(Vector &ve){*this = ve;}
-			Vector(unsigned long size, unsigned long value)
+			Vector(size_t size, unsigned long value)
 			{
-				vectr = _alloc.allocate(size);//check that size is less than max_size
+				if (size > _alloc.max_size())
+					throw std::length_error("allocator type T failed to allocate, max size reached");
+				vectr = _alloc.allocate(size);
 				size_type = size;
 				while (--size)
 					vectr[size] = value;

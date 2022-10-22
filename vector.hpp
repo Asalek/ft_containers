@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/20 05:51:57 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/22 00:17:21 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define VECTOR_H
 
 #include "iterators.hpp"
-#include <iostream>
 
 using	std::cout;
 using	std::endl;
@@ -33,39 +32,35 @@ namespace ft
 			typedef	const T&				const_reference;
 			typedef	T*						pointer;
 			typedef	const T*				const_pointer;
+			typedef	ft::random_Iter<T>		iterator;
 			size_t							size_type;
-			typedef	ft::Container<T>			iter;
 
 			//Connstructors & Destructor
-			Vector():size_type(0)
+			Vector():size_type(0), capacity(0)
 			{
 				vectr = _alloc.allocate(0);
-				capacity = 0;
 			};
-			Vector(Vector &ve)
-			{
-				*this = ve;
-			}
+			Vector(Vector &ve){*this = ve;}
 			Vector(unsigned long size, unsigned long value)
 			{
-				vectr = _alloc.allocate(size);
+				vectr = _alloc.allocate(size);//check that size is less than max_size
 				size_type = size;
 				while (--size)
 					vectr[size] = value;
 				vectr[0] = value;
 			}
+			
 			//Member Functions
-			void	resize(unsigned long	new_size)
+			iterator	begin()
 			{
-				if (new_size <= _alloc.max_size())
-				{
-					
-				}
-				else{}
-			}
+				iterator t(vectr);
+				return t;
+			};
+			// iterator	*end(){return this->vectr[size_type - 1];}
 			reference	front() {return vectr[0];}
 			reference	back() {return vectr[size_type - 1];}
 			unsigned long size() {return this->size_type;}
+
 			//Operators
 			reference operator[] (unsigned long n)
 			{
@@ -79,6 +74,8 @@ namespace ft
 				i = 0;
 				if (this == &ve)
 					return *this;
+				// if (this->size_type > 0)
+				// 	_alloc.deallocate(this->vectr, this->size_type);
 				this->size_type = ve.size_type;
 				this->vectr = _alloc.allocate(this->size_type);
 				while (i < this->size_type)
@@ -86,8 +83,10 @@ namespace ft
 					this->vectr[i] = ve[i];
 					i++;
 				}
+				this->capacity = ve.capacity;
 				return *this;
 			}
+			
 			//Data Types
 			private:
 				allocator_type							_alloc;

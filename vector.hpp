@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/22 22:39:00 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/24 04:44:17 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft
 			{
 				vectr = _alloc.allocate(0);
 			};
-			Vector(Vector &ve){*this = ve;}
+			Vector(Vector &ve){*this = ve; }
 			Vector(size_t size, unsigned long value)
 			{
 				_capacity = 987;//change when reserve is implemented
@@ -62,6 +62,7 @@ namespace ft
 			size_t			capacity() {return this->_capacity; }
 			size_t			max_size() {return _alloc.max_size(); }
 			bool			empty() {return this->size_type > 0 ? false : true; }
+			reference		at(size_t n) {return (n < size_type || n > size_type) ? (vectr[n]) : throw std::length_error("std::out_of_range at\n"); }
 
 			//Operators
 			reference operator[] (unsigned long n)

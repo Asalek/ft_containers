@@ -41,5 +41,6 @@ int main()
 	cout << "capacity() : " << vec.capacity() << endl;
 	cout << "max_size() : " << vec.max_size() << endl;
 	cout << "empty() :    " << vec.empty() << endl;
+	try{cout << "at() :       " << vec.at(4) << endl;} catch(std::exception &e){cout << e.what(); }
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/27 03:55:49 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/27 04:04:50 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ namespace ft
 			size_t			capacity() {return this->_capacity; }
 			size_t			max_size() {return _alloc.max_size(); }
 			bool			empty() {return this->size_type > 0 ? false : true; }
-			reference		at(size_t n) {return (n < size_type || n > size_type) ? (vectr[n]) : throw std::length_error("std::out_of_range at\n"); }
+			reference		at(size_t n) {return (n < size_type || n > size_type) ? (vectr[n]) : throw std::length_error("std::out_of_range\n"); }
 			void			resize(size_t n)
 			{
 				if (n > this->max_size() || n < 0)
@@ -94,7 +94,7 @@ namespace ft
 					throw std::bad_alloc();
 				}
 				for (size_t i = 0; i < size_type; i++)
-					_alloc.construct(vectr + i, vec + i);
+					_alloc.construct(vectr + i, vec[i]);
 				_alloc.deallocate(vec.vectr, vec.size_type);
 			}
 			//Operators

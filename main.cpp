@@ -41,18 +41,10 @@ int main()
 	cout << "capacity() : " << vec.capacity() << endl;
 	cout << "max_size() : " << vec.max_size() << endl;
 	cout << "empty() :    " << vec.empty() << endl;
-	// try{cout << "at() :       " << vec.at(4) << endl;} catch(std::exception &e){cout << e.what(); }
-	vec.at(0);
-	vec.at(1);
-	vec.at(2);
-	vec.at(3);
-	vec.at(4);
+	try{cout << "at() :       " << vec.at(4) << endl;} catch(std::exception &e){cout << e.what(); }
+	vec.reserve(990);
+	cout << "resize() the new capacity : " << vec.capacity() << endl;
 
-	cout <<"vec[0]__" << vec[0] << endl;
-	cout <<"vec[1]__" << vec[1] << endl;
-	cout <<"vec[2]__" << vec[2] << endl;
-	cout <<"vec[3]__" << vec[3] << endl;
-	cout <<"vec[4]__" << vec[4] << endl;
 
 	return 0;
 }

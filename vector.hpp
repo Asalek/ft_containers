@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/27 04:04:50 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/27 21:28:53 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ namespace ft
 			{
 				if (n > this->max_size() || n < 0)
 					throw std::length_error("allocator failed to allocate, max/min size reached");
-				if (n > this->_capacity)
-				{
-					_capacity = n;
-				}
+				if (n < this->size_type || n > this->size_type)
+					reduceContainerSize(n);
+				else
+					return ;
 			}
 			void			reserve(size_t n)
 			{
@@ -81,7 +81,7 @@ namespace ft
 					throw std::length_error("allocator failed to allocate, max/min size reached");
 				if (n <= this->_capacity)
 					return ;
-				if (_capacity == 0)
+				if (_capacity == 0 || (n > _capacity * 2))
 					_capacity = n;
 				else if (n > _capacity)
 					_capacity *= 2;
@@ -127,6 +127,31 @@ namespace ft
 				T*										vectr;
 				unsigned	long						i;
 				size_t						_capacity;
+			
+			//extra methods
+				void	reduceContainerSize(size_t n)
+				{
+					Vector new_p(*this);
+					for (size_t i = 0; i < size_type; i++)
+						_alloc.destroy(vectr + i);
+					_alloc.deallocate(vectr, size_type);
+					try	{ vectr = _alloc.allocate(n); }
+					catch (const std::exception &e)
+					{
+						cout << e.what() << '\n';
+						throw std::bad_alloc();
+					}
+					for (size_t i = 0; i < n; i++)
+					{
+						if (i <= new_p.size_type)
+							vectr[i] = new_p.vectr[i];
+						else
+							vectr[i] = 0;
+					}
+					_alloc.deallocate(new_p.vectr, n);
+					_capacity = n;
+					size_type = n;
+				}
 	};
 }
 

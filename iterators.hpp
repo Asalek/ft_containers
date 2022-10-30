@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/22 05:03:34 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/27 20:41:16 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ namespace ft
 
 			random_Iter() : _ptr(nullptr) {}
 			random_Iter(Type* rhs) : _ptr(rhs) {}
-			// random_Iter(Type rhs) : _ptr(rhs) {std::cout << "C";}
 			random_Iter(const random_Iter &rhs) : _ptr(rhs._ptr) {}
 
 			
@@ -45,7 +44,7 @@ namespace ft
 			inline difference_type operator-(const random_Iter& rhs) const {return _ptr-rhs.ptr;}
 			inline random_Iter operator+(difference_type rhs) const {return random_Iter(_ptr+rhs);}
 			inline random_Iter operator-(difference_type rhs) const {return random_Iter(_ptr-rhs);}
-			friend inline random_Iter operator+(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs+rhs._ptr);}
-			friend inline random_Iter operator-(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs-rhs._ptr);}
+			// friend inline random_Iter operator+(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs+rhs._ptr);}
+			// friend inline random_Iter operator-(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs-rhs._ptr);}
 	};
 }

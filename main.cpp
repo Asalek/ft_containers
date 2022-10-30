@@ -43,8 +43,8 @@ int main()
 	cout << "empty() :    " << vec.empty() << endl;
 	try{cout << "at() :       " << vec.at(4) << endl;} catch(std::exception &e){cout << e.what(); }
 	vec.reserve(990);
-	cout << "resize() the new capacity : " << vec.capacity() << endl;
-
-
+	cout << "reserve() the new capacity : " << vec.capacity() << endl;
+	cout << "resize() : ";
+	try {vec.resize(2); cout << "Done";} catch(std::exception &e){cout << e.what(); }
 	return 0;
 }

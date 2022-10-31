@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/31 11:06:34 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/31 11:16:49 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ namespace ft
 	template <typename T, class Allocator = allocator<T> >
 	class Vector
 	{
+		size_t							size_type;
 		public:
 			typedef	T						value_type;
 			typedef Allocator				allocator_type;
@@ -34,8 +35,6 @@ namespace ft
 			typedef	const T*				const_pointer;
 			typedef	ft::random_Iter<T>		iterator;
 			typedef	ft::random_Iter<const T>citerator; //const iterator
-			size_t							size_type;
-
 			//Connstructors & Destructor
 			Vector():size_type(0), _capacity(0)
 			{

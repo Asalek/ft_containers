@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/27 21:28:53 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/31 10:30:33 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ namespace ft
 			
 			//Member Functions
 			iterator		begin() { return iterator (vectr); };
-			// citerator		cbegin() const { return citerator (vectr); }
+			citerator		cbegin() const { return (citerator (vectr)); }
 			iterator		end() { return iterator(vectr + size_type - 1); }
 			reference		front() {return vectr[0]; }
 			reference		back() {return vectr[size_type - 1]; }

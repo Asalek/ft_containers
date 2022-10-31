@@ -27,12 +27,17 @@ int main()
 	cout <<"vec[4]__" << vec[4] << endl;
 
 	//iterator
+	const Vector<int> vec3(4,33);
 	ft::Vector<int>::iterator iter;
+	ft::Vector<int>::citerator citer;
 	iter = vec.begin();			//begin
 	cout << *iter << "  <---  begin iterator value\n";
-	iter = vec.end();				//end
+	iter = vec.end();			//end
 	cout << *iter << "  <---  end iterator value\n";
-
+	citer = vec3.cbegin();
+	cout << *citer << "  <---  cbegin iterator value\n";
+	citer = vec3.cend();
+	cout << *citer << "  <---  cend iterator value\n";
 
 	//methods
 	cout << "front() :    " << vec.front() << endl;

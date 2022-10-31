@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/31 10:30:33 by asalek           ###   ########.fr       */
+/*   Updated: 2022/10/31 11:00:03 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@ namespace ft
 			
 			//Member Functions
 			iterator		begin() { return iterator (vectr); };
-			citerator		cbegin() const { return (citerator (vectr)); }
-			iterator		end() { return iterator(vectr + size_type - 1); }
-			reference		front() {return vectr[0]; }
-			reference		back() {return vectr[size_type - 1]; }
-			unsigned long	size() {return this->size_type; }
-			size_t			capacity() {return this->_capacity; }
-			size_t			max_size() {return _alloc.max_size(); }
-			bool			empty() {return this->size_type > 0 ? false : true; }
-			reference		at(size_t n) {return (n < size_type || n > size_type) ? (vectr[n]) : throw std::length_error("std::out_of_range\n"); }
+			citerator		cbegin() const { return (citerator (vectr)); };
+			iterator		end() { return iterator(vectr + size_type - 1); };
+			citerator		cend() const { return citerator(vectr + size_type - 1); };
+			reference		front() {return vectr[0]; };
+			reference		back() {return vectr[size_type - 1]; };
+			unsigned long	size() {return this->size_type; };
+			size_t			capacity() {return this->_capacity; };
+			size_t			max_size() {return _alloc.max_size(); };
+			bool			empty() {return this->size_type > 0 ? false : true; };
+			reference		at(size_t n) {return (n < size_type && n >= 0) ? (vectr[n]) : throw std::length_error("std::out_of_range\n"); };
 			void			resize(size_t n)
 			{
 				if (n > this->max_size() || n < 0)

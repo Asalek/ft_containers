@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/01 12:13:02 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:19:46 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ namespace ft
 			{
 				this->_alloc = alloc;
 			};
-			Vector(Vector &ve){*this = ve; }
-			Vector(size_t size, value_type value):size_type(0), _capacity(0)
+			Vector(const Vector &ve){*this = ve; }
+			Vector(size_t size, const value_type& value = value_type(), const allocator_type& alloc = allocator_type()):size_type(0), _capacity(0)
 			{
-				if (size <= 0)
-					return ;
+				this->_alloc = alloc;
 				if (size > _alloc.max_size())
 					throw std::length_error("allocator type T failed to allocate, max size reached");
 				this->vectr = _alloc.allocate(size);
@@ -107,14 +106,21 @@ namespace ft
 				// _alloc.deallocate(vec.vectr, vec.size_type);
 			}
 			//Operators
-			reference operator[] (unsigned long n)
+			reference operator[] (size_t n)
 			{
 				if (n < 0 || n >= this->size_type)
 					return vectr[size_type - 1];
 				else
 					return vectr[n];
 			}
-			Vector	&operator=(Vector &ve)
+			const_reference operator[] (size_t n) const
+			{
+				if (n < 0 || n >= this->size_type)
+					return vectr[size_type - 1];
+				else
+					return vectr[n];
+			}
+			Vector	&operator=(const Vector &ve)
 			{
 				i = 0;
 				if (this == &ve)

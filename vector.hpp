@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/01 15:44:17 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/01 19:48:26 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ namespace ft
 			}
 			~Vector() throw()
 			{
-				for (size_t i = 0; i < this->_capacity; i++)
+				for (size_t i = 0; i < this->size_type; i++)
 					_alloc.destroy(vectr + i);
 				if(_capacity)
 					_alloc.deallocate(vectr, _capacity);
@@ -73,14 +73,28 @@ namespace ft
 			bool			empty() {return this->size_type > 0 ? false : true; };
 			reference		at(size_t n) {return (n < size_type && n >= 0) ? (vectr[n]) : throw std::length_error("std::out_of_range\n"); };
 			const_reference	at(size_t n) const {return (n < size_type && n >= 0) ? (vectr[n]) : throw std::length_error("std::out_of_range\n"); };
-			void			resize(size_t n)
+			void			shrink_to_fit()
+			{
+				if (_capacity > this->size_type)
+					reduceContainerSize(size_type);
+				else
+					return ;
+			}
+			void			resize(size_t n, const value_type& val = value_type())
 			{
 				if (n > this->max_size() || n < 0)
 					throw std::length_error("allocator failed to allocate, max/min size reached");
-				if (n < this->size_type || n > this->size_type)
-					reduceContainerSize(n);
+				if (n < size_type)
+				{
+					for (; n < size_type; n++)
+						_alloc.destroy(vectr + n);
+				}				
+				// if (n < this->size_type || n > this->size_type)
+				// 	reduceContainerSize(n);
 				else if (n > this->_capacity)
-					reserve(n);
+				{
+					reserve(n);					
+				}
 				else
 					return ;
 			}
@@ -111,6 +125,7 @@ namespace ft
 			//Operators
 			reference operator[] (size_t n)
 			{
+				// cout << "\nhada -->  " << n << "...." << vectr[n] << endl;
 				if (n < 0 || n >= this->size_type)
 					return vectr[size_type - 1];
 				else
@@ -132,7 +147,7 @@ namespace ft
 				this->vectr = _alloc.allocate(this->size_type);
 				while (i < this->size_type)
 				{
-					this->vectr[i] = ve[i];
+					_alloc.construct(vectr + i, ve[i]);
 					i++;
 				}
 				this->_capacity = ve._capacity;
@@ -160,12 +175,10 @@ namespace ft
 						cout << e.what() << '\n';
 						throw std::bad_alloc();
 					}
-					for (size_t i = 0; i < n; i++)
+					for (size_t i = 0; i < size_type; i++)
 					{
-						if (i <= new_p.size_type)
-							vectr[i] = new_p.vectr[i];
-						else
-							vectr[i] = 0;
+						// if (i < new_p.size_type)
+							_alloc.construct(vectr + i, new_p[i]);
 					}
 					_capacity = n;
 					size_type = n;

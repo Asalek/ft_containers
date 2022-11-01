@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/10/31 11:16:49 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/01 11:58:01 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,32 @@ namespace ft
 			typedef	const T*				const_pointer;
 			typedef	ft::random_Iter<T>		iterator;
 			typedef	ft::random_Iter<const T>citerator; //const iterator
+			
 			//Connstructors & Destructor
 			Vector():size_type(0), _capacity(0)
 			{
 				vectr = _alloc.allocate(0);
 			};
 			Vector(Vector &ve){*this = ve; }
-			Vector(size_t size, unsigned long value)
+			Vector(size_t size, unsigned long value):size_type(0), _capacity(0)
 			{
-				_capacity = 987;//change when reserve is implemented
+				if (size <= 0)
+					return ;
 				if (size > _alloc.max_size())
 					throw std::length_error("allocator type T failed to allocate, max size reached");
-				vectr = _alloc.allocate(size);
-				size_type = size;
-				while (--size)
-					_alloc.construct(&(vectr[size]), value); //put value in vectr[size] (vectr + size) || &(vectr[size])
-				// 	vectr[size] = value;
-				vectr[0] = value;
+				this->vectr = _alloc.allocate(size);
+				for (size_t i = 0; i < size; i++)
+					_alloc.construct(&(vectr[i]), value); //put value in vectr[size] (vectr + size) || &(vectr[size])
+				this->size_type = size;
+				this->_capacity = size;
 			}
-			
+			~Vector() throw()
+			{
+				for (size_t i = 0; i < this->_capacity; i++)
+					_alloc.destroy(vectr + i);
+				if(_capacity)
+					_alloc.deallocate(vectr, _capacity);
+			}
 			//Member Functions
 			iterator		begin() { return iterator (vectr); };
 			citerator		cbegin() const { return (citerator (vectr)); };
@@ -82,12 +89,13 @@ namespace ft
 					throw std::length_error("allocator failed to allocate, max/min size reached");
 				if (n <= this->_capacity)
 					return ;
+				if (_capacity > 0)
+					_alloc.deallocate(vectr, _capacity);
 				if (_capacity == 0 || (n > _capacity * 2))
 					_capacity = n;
 				else if (n > _capacity)
 					_capacity *= 2;
 				Vector vec(*this);
-				_alloc.deallocate(vectr, size_type);
 				try	{ vectr = _alloc.allocate(_capacity); }
 				catch (const std::exception &e)
 				{
@@ -96,7 +104,7 @@ namespace ft
 				}
 				for (size_t i = 0; i < size_type; i++)
 					_alloc.construct(vectr + i, vec[i]);
-				_alloc.deallocate(vec.vectr, vec.size_type);
+				// _alloc.deallocate(vec.vectr, vec.size_type);
 			}
 			//Operators
 			reference operator[] (unsigned long n)
@@ -149,7 +157,6 @@ namespace ft
 						else
 							vectr[i] = 0;
 					}
-					_alloc.deallocate(new_p.vectr, n);
 					_capacity = n;
 					size_type = n;
 				}

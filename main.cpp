@@ -18,8 +18,8 @@ int main()
 		cout << e.what();
 	}
 	
-	//fill container and display
-	vec[5] = 9999;		//if you over pass or set -1 as a value a reference to the end of container is returned
+	//fill container and display, and test the [] operator
+	vec[5] = 9999;		//if you over pass or set a negative value a reference to the end of container is returned
 	cout <<"vec[0]__" << vec[0] << endl;
 	cout <<"vec[1]__" << vec[1] << endl;
 	cout <<"vec[2]__" << vec[2] << endl;
@@ -40,6 +40,7 @@ int main()
 	cout << *citer << "  <---  cend iterator value\n";
 
 	//methods
+
 	cout << "front() :    " << vec.front() << endl;
 	cout << "back() :     " << vec.back() << endl;
 	cout << "size() :     " << vec.size() << endl;
@@ -52,4 +53,5 @@ int main()
 	cout << "resize() : ";
 	try {vec.resize(2); cout << "Done";} catch(std::exception &e){cout << e.what(); }
 	return 0;
+
 }

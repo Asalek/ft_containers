@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/01 15:19:46 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:40:15 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ namespace ft
 				try	{ vectr = _alloc.allocate(_capacity); }
 				catch (const std::exception &e)
 				{
+					*this = vec;
 					cout << e.what() << '\n';
 					throw std::bad_alloc();
 				}
@@ -153,6 +154,7 @@ namespace ft
 					try	{ vectr = _alloc.allocate(n); }
 					catch (const std::exception &e)
 					{
+						*this = new_p;//in case of failed to allocate, data got stored
 						cout << e.what() << '\n';
 						throw std::bad_alloc();
 					}

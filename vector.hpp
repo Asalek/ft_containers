@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/01 15:40:15 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:44:17 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ namespace ft
 					throw std::length_error("allocator failed to allocate, max/min size reached");
 				if (n < this->size_type || n > this->size_type)
 					reduceContainerSize(n);
+				else if (n > this->_capacity)
+					reserve(n);
 				else
 					return ;
 			}

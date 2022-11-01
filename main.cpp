@@ -53,6 +53,6 @@ int main()
 	cout << "reserve() the new capacity : " << vec.capacity() << endl;
 	cout << "resize() : ";
 	try {vec.resize(2); cout << "Done";} catch(std::exception &e){cout << e.what(); }
-	return 0;
 
+	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/01 11:58:01 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/01 12:13:02 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ namespace ft
 			typedef	ft::random_Iter<const T>citerator; //const iterator
 			
 			//Connstructors & Destructor
-			Vector():size_type(0), _capacity(0)
+			Vector(const allocator_type& alloc = allocator_type()):size_type(0), _capacity(0)
 			{
-				vectr = _alloc.allocate(0);
+				this->_alloc = alloc;
 			};
 			Vector(Vector &ve){*this = ve; }
-			Vector(size_t size, unsigned long value):size_type(0), _capacity(0)
+			Vector(size_t size, value_type value):size_type(0), _capacity(0)
 			{
 				if (size <= 0)
 					return ;

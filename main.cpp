@@ -6,6 +6,7 @@ using namespace ft;
 int main()
 {
 	//test constructors and fill container
+	Vector<string> vec0(5, "ayoub");
 	Vector<int> vec(5, 77);
 	Vector<int> vec2;
 	vec2 = vec;

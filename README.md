@@ -17,6 +17,24 @@ if ( a != 0 ) {  // a check is necessary for delete
 }
 ```
 
+### Iterators
+```
+{
+///  Marking input iterators.
+  struct input_iterator_tag {};
+  ///  Marking output iterators.
+  struct output_iterator_tag {};
+  /// Forward iterators support a superset of input iterator operations.
+  struct forward_iterator_tag : public input_iterator_tag {};
+  /// Bidirectional iterators support a superset of forward iterator
+  /// operations.
+  struct bidirectional_iterator_tag : public forward_iterator_tag {};
+  /// Random-access iterators support a superset of bidirectional iterator
+  /// operations.
+  struct random_access_iterator_tag : public bidirectional_iterator_tag {};
+}
+```
+
 ### Allocators
 <p>
 The purpose of the allocator is to allocate raw memory without construction of objects, as well as simply deallocate memory without the need to destroy them, hence the usage of operator new and operator delete directly is preferred over the usage of the keywords new and delete.
@@ -37,3 +55,6 @@ enable_if :
 
 C++ tutorial :
 		https://github.com/Asalek/Cpp_Module
+
+Iterator Taraits:
+		https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits

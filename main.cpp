@@ -50,8 +50,10 @@ int main()
 	try{cout << "at() :       " << vec.at(4) << endl;} catch(std::exception &e){cout << e.what(); }
 	vec.reserve(990);
 	cout << "reserve() the new capacity : " << vec.capacity() << endl;
+	vec.shrink_to_fit();
+	cout << "shrink_to_fit() new capacity : " << vec.capacity() << ", size : " << vec.size() << endl;
 	cout << "resize() : ";
 	try {vec.resize(2); cout << "Done";} catch(std::exception &e){cout << e.what(); }
-	
+
 	return 0;
 }

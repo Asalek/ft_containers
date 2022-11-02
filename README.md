@@ -26,7 +26,14 @@ The purpose of the allocator is to allocate raw memory without construction of o
 
 SFINAE stands for "substitution failure is not an error."
 
+
 ## sources :
+
+SFINAE :
+		https://www.youtube.com/watch?v=mNxAqLVIaW0&ab_channel=WolfSound
+
+enable_if :
+		https://www.youtube.com/watch?v=H-m23Vvzcug&t=482s
 
 C++ tutorial :
 		https://github.com/Asalek/Cpp_Module

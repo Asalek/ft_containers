@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/01 19:48:26 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/02 09:12:40 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,22 @@ namespace ft
 				else
 					return ;
 			}
-			void			resize(size_t n, const value_type& val = value_type())
+			void			resize(size_t n, value_type val = value_type())
 			{
 				if (n > this->max_size() || n < 0)
 					throw std::length_error("allocator failed to allocate, max/min size reached");
 				if (n < size_type)
 				{
-					for (; n < size_type; n++)
-						_alloc.destroy(vectr + n);
+					for (size_t	i = n; i < size_type; i++)
+						_alloc.destroy(vectr + i);
+					this->size_type = n;
 				}				
-				// if (n < this->size_type || n > this->size_type)
-				// 	reduceContainerSize(n);
-				else if (n > this->_capacity)
+				else if (n > this->size_type)
 				{
-					reserve(n);					
+					reserve(n);
+					for (; size_type < n; size_type++)
+						_alloc.construct(this->vectr + this->size_type, val);					
 				}
-				else
-					return ;
 			}
 			void			reserve(size_t n)
 			{
@@ -120,12 +119,10 @@ namespace ft
 				}
 				for (size_t i = 0; i < size_type; i++)
 					_alloc.construct(vectr + i, vec[i]);
-				// _alloc.deallocate(vec.vectr, vec.size_type);
 			}
 			//Operators
 			reference operator[] (size_t n)
 			{
-				// cout << "\nhada -->  " << n << "...." << vectr[n] << endl;
 				if (n < 0 || n >= this->size_type)
 					return vectr[size_type - 1];
 				else
@@ -176,10 +173,7 @@ namespace ft
 						throw std::bad_alloc();
 					}
 					for (size_t i = 0; i < size_type; i++)
-					{
-						// if (i < new_p.size_type)
-							_alloc.construct(vectr + i, new_p[i]);
-					}
+						_alloc.construct(vectr + i, new_p[i]);
 					_capacity = n;
 					size_type = n;
 				}

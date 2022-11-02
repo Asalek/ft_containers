@@ -4,7 +4,7 @@
 using namespace ft;
 
 int main()
-{/*
+{
 	//test constructors and fill container
 	Vector<string> vec0(5, "asalek");
 	Vector<int> vec(5, 77);
@@ -51,15 +51,7 @@ int main()
 	vec.reserve(990);
 	cout << "reserve() the new capacity : " << vec.capacity() << endl;
 	cout << "resize() : ";
-	try {vec.resize(2); cout << "Done";} catch(std::exception &e){cout << e.what(); }*/
-	{
-		Vector<string> a(20, "x_X_x_X_x");
-		a.resize(50);
-		// for (size_t i = 0; i < 50; i++)
-		// {
-		// 	a[i];
-		// }
-		
-	}
+	try {vec.resize(2); cout << "Done";} catch(std::exception &e){cout << e.what(); }
+	
 	return 0;
 }

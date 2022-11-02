@@ -54,6 +54,22 @@ int main()
 	cout << "shrink_to_fit() new capacity : " << vec.capacity() << ", size : " << vec.size() << endl;
 	cout << "resize() : ";
 	try {vec.resize(2); cout << "Done";} catch(std::exception &e){cout << e.what(); }
-
+	
+	//test get_allocator
+	{
+		Vector<int> myvector;
+		int *p;
+		p = myvector.get_allocator().allocate(5);
+		for (size_t i = 0; i < 5; i++)
+			myvector.get_allocator().construct(&p[i], i);
+		//display the vector content 0 1 2 3 4
+		cout << "The allocated array contains : \n";
+		for (size_t i = 0; i < 5; i++)
+			cout << p[i] << endl;
+		// destroy and deallocate
+		for (size_t i = 0; i < 5; i++)
+			myvector.get_allocator().destroy(&p[i]);
+		myvector.get_allocator().deallocate(p, 5);				
+	}
 	return 0;
 }

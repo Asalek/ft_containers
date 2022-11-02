@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/02 12:43:25 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/02 13:41:52 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,12 @@ namespace ft
 				for (size_t i = 0; i < size_type; i++)
 					_alloc.construct(vectr + i, vec[i]);
 			}
-			allocator_type	get_allocator()
+			allocator_type	get_allocator() { return this->_alloc; }
+			void			clear()
 			{
-				return this->_alloc;
+				for (size_t i = 0; i < size_type; i++)
+					_alloc.destroy(vectr + i);
+				size_type = 0;
 			}
 			//Operators
 			reference operator[] (size_t n)

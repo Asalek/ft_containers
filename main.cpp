@@ -71,5 +71,6 @@ int main()
 			myvector.get_allocator().destroy(&p[i]);
 		myvector.get_allocator().deallocate(p, 5);				
 	}
+	vec.clear();
 	return 0;
 }

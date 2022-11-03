@@ -79,6 +79,7 @@ int main()
 
 		if (foo==bar) std::cout << "foo and bar are equal\n";
 		if (foo!=bar) std::cout << "foo and bar are not equal\n";
+		if (foo< bar) std::cout << "foo is less than bar\n";
 	}
 	vec.clear();
 	return 0;

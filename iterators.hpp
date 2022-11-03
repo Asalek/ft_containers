@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 09:14:03 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 09:21:25 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,16 @@ namespace ft
 	bool operator==(const random_Iter<Iter> &lhs, const random_Iter<Iter> &rhs)
 	{
 		return (lhs.base() == rhs.base());
+	}
+	template <class InputIterator1, class InputIterator2>
+	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2)
+	{
+		while (first1!=last1)
+		{
+			if (first2==last2 || *first2<*first1) return false;
+				else if (*first1<*first2) return true;
+					++first1; ++first2;
+		}
+		return (first2!=last2);
 	}
 }

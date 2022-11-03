@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 13:41:34 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 15:29:29 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ namespace ft
 			typedef	const T*				const_pointer;
 			typedef	ft::random_Iter<T>		iterator;
 			typedef	ft::random_Iter<const T>citerator; //const iterator
-			
+			typedef std::ptrdiff_t			difference_type;
 			//Connstructors & Destructor
 			Vector(const allocator_type& alloc = allocator_type()):size_type(0), _capacity(0)
 			{
@@ -164,6 +164,42 @@ namespace ft
 				}
 				this->_capacity = ve._capacity;
 				return *this;
+			}
+			iterator	erase(iterator pos)
+			{
+				difference_type index = pos - this->begin();
+				if (index < 0 || (size_t)index > size_type)
+					throw std::out_of_range("out_of_range");
+				size_t j = 0;
+				for (size_t i = 0; i < size(); i++)
+				{
+					if (i == (size_t)index)
+						_alloc.destroy(&vectr[i++]);
+					_alloc.construct(&vectr[j++], vectr[i]);
+				}
+				size_type--;
+				return (iterator(this->vectr + index));
+			}
+			iterator	erase(iterator from, iterator to)
+			{
+				difference_type index = from - begin();
+				if (((to - from) <= 0) || index < 0)
+					throw std::out_of_range("out_of_range");
+				size_t	len = 0, j = 0;
+				for (size_t i = 0; i < size_type; i++)
+				{
+					if (i == (size_t)index)
+					{
+						for (; from != to; from++)
+						{
+							this->_alloc.destroy(&this->vectr[i++]);
+							len++;
+						}
+					}
+					this->_alloc.construct(&vectr[j++], vectr[i]);
+				}
+				size_type -= len;
+				return (iterator(vectr + index));
 			}
 			
 			//Data Types

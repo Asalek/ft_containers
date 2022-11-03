@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 12:02:24 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 15:26:26 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ namespace ft
 			inline Type& operator[](difference_type rhs) const {return _ptr[rhs];}
 			inline random_Iter& operator++() {++_ptr; return *this;}
 			inline random_Iter& operator--() {--_ptr; return *this;}
-			inline random_Iter operator++(int) const {random_Iter tmp(*this); ++_ptr; return tmp;}
-			inline random_Iter operator--(int) const {random_Iter tmp(*this); --_ptr; return tmp;}
+			inline random_Iter operator++(int) {random_Iter tmp(*this); ++_ptr; return tmp;}
+			inline random_Iter operator--(int) {random_Iter tmp(*this); --_ptr; return tmp;}
 			inline random_Iter operator+(const random_Iter& rhs) {return random_Iter(_ptr+rhs.ptr);}
-			inline difference_type operator-(const random_Iter& rhs) const {return _ptr-rhs.ptr;}
+			inline difference_type operator-(const random_Iter& rhs) const {return _ptr-rhs._ptr;}
 			inline random_Iter operator+(difference_type rhs) const {return random_Iter(_ptr+rhs);}
 			inline random_Iter operator-(difference_type rhs) const {return random_Iter(_ptr-rhs);}
 			Type	base() const {return *this->_ptr;}
@@ -99,5 +99,11 @@ namespace ft
 	bool operator>(const random_Iter<Iter> &lhs, const random_Iter<Iter> &rhs)
 	{
 		return (lhs.base() > rhs.base());
+	}
+	
+	template <class Iter>
+	typename random_Iter<Iter>::difference_type operator-(const random_Iter<Iter> &lhs, const random_Iter<Iter> &rhs)
+	{
+		return (lhs.base() - rhs.base());
 	}
 }

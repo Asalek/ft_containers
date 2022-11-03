@@ -63,7 +63,7 @@ int main()
 		for (size_t i = 0; i < 5; i++)
 			myvector.get_allocator().construct(&p[i], i);
 		//display the vector content 0 1 2 3 4
-		cout << "The allocated array contains : \n";
+		cout << "get_allocator allocated array contains : \n";
 		for (size_t i = 0; i < 5; i++)
 			cout << p[i] << endl;
 		// destroy and deallocate
@@ -100,5 +100,27 @@ int main()
 			cout << "vec2 :" << vec2[i] <<  ",";
 		ft::swap(vec, vec2);
 	}
+
+	{
+		Vector<int> myvector(10);
+
+		// set some values (from 1 to 10)
+		for (int i=0; i<=10; i++)
+			myvector[i] = i+1;
+
+		// erase the 6th element
+		myvector.erase (myvector.begin()+5);
+
+		// erase the first 3 elements:
+		myvector.erase (myvector.begin(),myvector.begin()+3);
+
+		std::cout << "\nmyvector after erase() contains:";
+		for (unsigned i=0; i<myvector.size(); ++i)
+		std::cout << ' ' << myvector[i];
+		std::cout << '\n';
+	}
+
+	try{vec.erase(vec.begin() + 2);} catch(std::exception &e){cout << e.what(); }
+
 	return 0;
 }

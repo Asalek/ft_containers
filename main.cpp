@@ -85,5 +85,20 @@ int main()
 		if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
 	}
 	vec.clear();
+
+	//test swap function
+	{
+		Vector<int> vec(5, 200);
+		Vector<int> vec2(6, 999);
+
+		vec.swap(vec2);
+		cout << "the first swap\n";
+		for (size_t i = 0; i < 5; i++)
+			cout << "vec :" << vec[i] << ",";
+		cout << endl;
+		for (size_t i = 0; i < 6; i++)
+			cout << "vec2 :" << vec2[i] <<  ",";
+		ft::swap(vec, vec2);
+	}
 	return 0;
 }

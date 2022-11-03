@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 13:29:10 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 13:41:34 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ namespace ft
 				std::swap(this->_alloc, ve._alloc);
 				std::swap(this->vectr, ve.vectr);
 			}
-			void	swap(Vector &ve, Vector &ve2) { ve.swap(ve2); }
 			//Operators
 			reference operator[] (size_t n)
 			{
@@ -231,6 +230,13 @@ namespace ft
 	{
 		return (lhs < rhs || rhs == lhs);
 	};
+	
+	//methods
+	template<class T, class allocator>
+	void	swap(Vector<T, allocator> &ve, Vector<T, allocator> &ve2)
+	{
+		ve.swap(ve2);
+	}
 }
 
 #endif

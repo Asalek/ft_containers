@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 12:01:49 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 13:29:10 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,14 @@ namespace ft
 					_alloc.destroy(vectr + i);
 				size_type = 0;
 			}
+			void	swap(Vector &ve)
+			{
+				std::swap(this->size_type, ve.size_type);
+				std::swap(this->_capacity, ve._capacity);
+				std::swap(this->_alloc, ve._alloc);
+				std::swap(this->vectr, ve.vectr);
+			}
+			void	swap(Vector &ve, Vector &ve2) { ve.swap(ve2); }
 			//Operators
 			reference operator[] (size_t n)
 			{

@@ -78,6 +78,7 @@ int main()
 		Vector<int> bar (2,200);   // two ints with a value of 200
 
 		if (foo==bar) std::cout << "foo and bar are equal\n";
+		if (foo!=bar) std::cout << "foo and bar are not equal\n";
 	}
 	vec.clear();
 	return 0;

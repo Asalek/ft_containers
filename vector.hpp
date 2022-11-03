@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 08:54:06 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 09:17:47 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,13 +186,22 @@ namespace ft
 					size_type = n;
 				}
 	};
-	
+
+	//comparision operators 
 	template <class T, class Alloc>
 	bool operator== (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
 	{
 		if (lhs.size() != rhs.size())
 			return false;
 		return (ft::equal(lhs.cbegin(), lhs.cend(), rhs.cbegin()));
+	};
+
+	template <class T, class Alloc>
+	bool operator!= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return true;
+		return !(ft::equal(lhs.cbegin(), lhs.cend(), rhs.cbegin()));
 	};
 }
 

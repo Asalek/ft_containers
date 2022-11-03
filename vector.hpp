@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/02 13:41:52 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 08:54:06 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define VECTOR_H
 
 #include "iterators.hpp"
+#include "extra_algos.hpp"
 
 using	std::cout;
 using	std::endl;
@@ -67,7 +68,7 @@ namespace ft
 			citerator		cend() const { return citerator(vectr + size_type - 1); };
 			reference		front() {return vectr[0]; };
 			reference		back() {return vectr[size_type - 1]; };
-			unsigned long	size() {return this->size_type; };
+			size_t			size() const {return this->size_type; };
 			size_t			capacity() {return this->_capacity; };
 			size_t			max_size() {return _alloc.max_size(); };
 			bool			empty() {return this->size_type > 0 ? false : true; };
@@ -184,6 +185,14 @@ namespace ft
 					_capacity = n;
 					size_type = n;
 				}
+	};
+	
+	template <class T, class Alloc>
+	bool operator== (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+		return (ft::equal(lhs.cbegin(), lhs.cend(), rhs.cbegin()));
 	};
 }
 

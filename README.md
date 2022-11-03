@@ -56,5 +56,5 @@ enable_if :
 C++ tutorial :
 		https://github.com/Asalek/Cpp_Module
 
-Iterator Taraits:
+Iterator Taraits: it's made for te pointer that not iterators but behave like itertors ::
 		https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits

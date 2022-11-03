@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/02 12:37:56 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 09:14:03 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ namespace ft
         typedef T&                         reference;
     };
 
+    template <class T>
+    struct iterator_traits<const T*>
+	{
+        typedef T                          value_type;
+        typedef ptrdiff_t                  difference_type;
+        typedef std::random_access_iterator_tag iterator_category;
+        typedef const T*                         pointer;
+        typedef const T&                         reference;
+    };
+
 	template<typename Type>
 	class random_Iter : public std::iterator<std::random_access_iterator_tag, Type>
 	{
@@ -63,7 +73,19 @@ namespace ft
 			inline difference_type operator-(const random_Iter& rhs) const {return _ptr-rhs.ptr;}
 			inline random_Iter operator+(difference_type rhs) const {return random_Iter(_ptr+rhs);}
 			inline random_Iter operator-(difference_type rhs) const {return random_Iter(_ptr-rhs);}
+			random_Iter	base() const {return this->_ptr;}
 			// friend inline random_Iter operator+(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs+rhs._ptr);}
 			// friend inline random_Iter operator-(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs-rhs._ptr);}
 	};
+	template <class Iter>
+	bool operator!=(const random_Iter<Iter> &lhs, const random_Iter<Iter> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class Iter>
+	bool operator==(const random_Iter<Iter> &lhs, const random_Iter<Iter> &rhs)
+	{
+		return (lhs.base() == rhs.base());
+	}
 }

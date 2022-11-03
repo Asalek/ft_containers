@@ -71,6 +71,14 @@ int main()
 			myvector.get_allocator().destroy(&p[i]);
 		myvector.get_allocator().deallocate(p, 5);				
 	}
+
+	//test relational operators
+	{
+		Vector<int> foo (3,100);   // three ints with a value of 100
+		Vector<int> bar (2,200);   // two ints with a value of 200
+
+		if (foo==bar) std::cout << "foo and bar are equal\n";
+	}
 	vec.clear();
 	return 0;
 }

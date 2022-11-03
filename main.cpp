@@ -120,7 +120,22 @@ int main()
 		std::cout << '\n';
 	}
 
-	try{vec.erase(vec.begin() + 2);} catch(std::exception &e){cout << e.what(); }
+	//test assign
+	{
+		Vector<int> first;
+		Vector<int> second;
 
-	return 0;
+		first.assign (7,100);             // 7 ints with a value of 100
+
+		Vector<int>::iterator it;
+		it=first.begin()+1;
+
+		second.assign (it,first.end()); // the 5 central values of first
+
+		std::cout << "Size of first: " << int (first.size()) << '\n';
+		std::cout << "Size of second: " << int (second.size()) << '\n';
+		return 0;
+	}
+
+	try{vec.erase(vec.begin() + 2);}catch(std::exception &e) { cout << e.what(); }
 }

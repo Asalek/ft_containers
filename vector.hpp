@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 15:29:29 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 16:35:26 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,36 +135,6 @@ namespace ft
 				std::swap(this->_alloc, ve._alloc);
 				std::swap(this->vectr, ve.vectr);
 			}
-			//Operators
-			reference operator[] (size_t n)
-			{
-				if (n < 0 || n >= this->size_type)
-					return vectr[size_type - 1];
-				else
-					return vectr[n];
-			}
-			const_reference operator[] (size_t n) const
-			{
-				if (n < 0 || n >= this->size_type)
-					return vectr[size_type - 1];
-				else
-					return vectr[n];
-			}
-			Vector	&operator=(const Vector &ve)
-			{
-				i = 0;
-				if (this == &ve)
-					return *this;
-				this->size_type = ve.size_type;
-				this->vectr = _alloc.allocate(this->size_type);
-				while (i < this->size_type)
-				{
-					_alloc.construct(vectr + i, ve[i]);
-					i++;
-				}
-				this->_capacity = ve._capacity;
-				return *this;
-			}
 			iterator	erase(iterator pos)
 			{
 				difference_type index = pos - this->begin();
@@ -200,6 +170,57 @@ namespace ft
 				}
 				size_type -= len;
 				return (iterator(vectr + index));
+			}
+			void	assign(size_t n, const value_type &val)
+			{
+				this->resize(n, val);
+			}
+			void	assign(iterator begin, iterator end)
+			{
+				difference_type size = end - begin;
+				cout << size <<"<----------<<<<\n";
+				cout << *begin <<"<----------<<<<\n";
+				cout << *end <<"<----------<<<<\n";
+				this->resize(size);
+				size_t i = 0;
+				while (begin != end)
+				{
+					_alloc.construct(vectr + i, *begin);
+					i++;
+					begin++;
+				}
+				size_type = size;
+				_capacity = size;
+			}
+			//Operators
+			reference operator[] (size_t n)
+			{
+				if (n < 0 || n >= this->size_type)
+					return vectr[size_type - 1];
+				else
+					return vectr[n];
+			}
+			const_reference operator[] (size_t n) const
+			{
+				if (n < 0 || n >= this->size_type)
+					return vectr[size_type - 1];
+				else
+					return vectr[n];
+			}
+			Vector	&operator=(const Vector &ve)
+			{
+				i = 0;
+				if (this == &ve)
+					return *this;
+				this->size_type = ve.size_type;
+				this->vectr = _alloc.allocate(this->size_type);
+				while (i < this->size_type)
+				{
+					_alloc.construct(vectr + i, ve[i]);
+					i++;
+				}
+				this->_capacity = ve._capacity;
+				return *this;
 			}
 			
 			//Data Types

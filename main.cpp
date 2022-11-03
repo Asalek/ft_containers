@@ -53,7 +53,7 @@ int main()
 	vec.shrink_to_fit();
 	cout << "shrink_to_fit() new capacity : " << vec.capacity() << ", size : " << vec.size() << endl;
 	cout << "resize() : ";
-	try {vec.resize(2); cout << "Done";} catch(std::exception &e){cout << e.what(); }
+	try {vec.resize(2); cout << "Done\n";} catch(std::exception &e){cout << e.what(); }
 	
 	//test get_allocator
 	{
@@ -80,6 +80,9 @@ int main()
 		if (foo==bar) std::cout << "foo and bar are equal\n";
 		if (foo!=bar) std::cout << "foo and bar are not equal\n";
 		if (foo< bar) std::cout << "foo is less than bar\n";
+		if (foo> bar) std::cout << "foo is greater than bar\n";
+  		if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
+		if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
 	}
 	vec.clear();
 	return 0;

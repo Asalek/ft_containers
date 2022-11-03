@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 09:24:29 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 12:01:49 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ namespace ft
 					_alloc.deallocate(vectr, _capacity);
 			}
 			//Member Functions
-			iterator		begin() { return iterator (vectr); };
+			iterator		begin() const { return iterator (vectr); };
 			citerator		cbegin() const { return (citerator (vectr)); };
-			iterator		end() { return iterator(vectr + size_type - 1); };
+			iterator		end() const { return iterator(vectr + size_type - 1); };
 			citerator		cend() const { return citerator(vectr + size_type - 1); };
 			reference		front() {return vectr[0]; };
 			reference		back() {return vectr[size_type - 1]; };
@@ -191,25 +191,37 @@ namespace ft
 	template <class T, class Alloc>
 	bool operator== (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
 	{
-		if (lhs.size() != rhs.size())
-			return false;
-		return (ft::equal(lhs.cbegin(), lhs.cend(), rhs.cbegin()));
+		return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	};
 
 	template <class T, class Alloc>
 	bool operator!= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
 	{
-		if (lhs.size() != rhs.size())
-			return true;
-		return !(ft::equal(lhs.cbegin(), lhs.cend(), rhs.cbegin()));
+		return !(lhs == rhs);
 	};
 
 	template <class T, class Alloc>
 	bool operator< (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
 	{
-		if (lhs.size() != rhs.size())
-			return true;
-		return (ft::lexicographical_compare(lhs.cbegin(), lhs.cend(), rhs.cbegin(), rhs.cend()));
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	};
+
+	template <class T, class Alloc>
+	bool operator> (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
+	{
+		return (rhs < lhs);
+	};
+
+	template <class T, class Alloc>
+	bool operator>= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
+	{
+		return (lhs > rhs || rhs == lhs);
+	};
+
+	template <class T, class Alloc>
+	bool operator<= (const Vector<T,Alloc>& lhs, const Vector<T,Alloc>& rhs)
+	{
+		return (lhs < rhs || rhs == lhs);
 	};
 }
 

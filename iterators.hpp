@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 09:21:25 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/03 12:02:24 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ namespace ft
 			inline difference_type operator-(const random_Iter& rhs) const {return _ptr-rhs.ptr;}
 			inline random_Iter operator+(difference_type rhs) const {return random_Iter(_ptr+rhs);}
 			inline random_Iter operator-(difference_type rhs) const {return random_Iter(_ptr-rhs);}
-			random_Iter	base() const {return this->_ptr;}
+			Type	base() const {return *this->_ptr;}
 			// friend inline random_Iter operator+(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs+rhs._ptr);}
 			// friend inline random_Iter operator-(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs-rhs._ptr);}
 	};
@@ -88,15 +88,16 @@ namespace ft
 	{
 		return (lhs.base() == rhs.base());
 	}
-	template <class InputIterator1, class InputIterator2>
-	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2)
+
+	template <class Iter>
+	bool operator<(const random_Iter<Iter> &lhs, const random_Iter<Iter> &rhs)
 	{
-		while (first1!=last1)
-		{
-			if (first2==last2 || *first2<*first1) return false;
-				else if (*first1<*first2) return true;
-					++first1; ++first2;
-		}
-		return (first2!=last2);
+		return (lhs.base() < rhs.base());
+	}
+
+	template <class Iter>
+	bool operator>(const random_Iter<Iter> &lhs, const random_Iter<Iter> &rhs)
+	{
+		return (lhs.base() > rhs.base());
 	}
 }

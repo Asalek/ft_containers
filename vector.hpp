@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/04 12:39:28 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/04 14:59:11 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,10 +226,6 @@ namespace ft
 			}
 			void insert (iterator position, size_t n, const value_type& val)
 			{
-				difference_type index = position - begin();
-				if (index < 0)
-					throw std::out_of_range("out of range insert size_t n\n");
-				// reserve(size_type + n);
 				while (n)
 				{
 					insert(position, val);

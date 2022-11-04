@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/03 16:35:26 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/04 10:59:04 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ namespace ft
 			}
 			void			reserve(size_t n)
 			{
-				if (n < 0 || n > this->max_size())
+				if (n > this->max_size())
 					throw std::length_error("allocator failed to allocate, max/min size reached");
 				if (n <= this->_capacity)
 					return ;
@@ -178,9 +178,6 @@ namespace ft
 			void	assign(iterator begin, iterator end)
 			{
 				difference_type size = end - begin;
-				cout << size <<"<----------<<<<\n";
-				cout << *begin <<"<----------<<<<\n";
-				cout << *end <<"<----------<<<<\n";
 				this->resize(size);
 				size_t i = 0;
 				while (begin != end)
@@ -191,6 +188,15 @@ namespace ft
 				}
 				size_type = size;
 				_capacity = size;
+			}
+			void	push_back(const value_type &val)
+			{
+				if (size_type < 10)
+					reserve(size_type + 1);
+				else if (size_type > (_capacity / 4 * 3))
+					reserve(_capacity + (this->_capacity / 4));
+				_alloc.construct(vectr + size_type, val);
+				size_type++;
 			}
 			//Operators
 			reference operator[] (size_t n)
@@ -222,7 +228,6 @@ namespace ft
 				this->_capacity = ve._capacity;
 				return *this;
 			}
-			
 			//Data Types
 			private:
 				allocator_type							_alloc;

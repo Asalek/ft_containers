@@ -129,13 +129,19 @@ int main()
 
 		Vector<int>::iterator it;
 		it=first.begin()+1;
-
 		second.assign (it,first.end()); // the 5 central values of first
 
 		std::cout << "Size of first: " << int (first.size()) << '\n';
 		std::cout << "Size of second: " << int (second.size()) << '\n';
-		return 0;
 	}
+	//test push_back
+	
+	cout << "size() before push_back : " << vec.size() << endl;
+	cout << "capacity() before push_back : " << vec.size() << endl;
+	for (size_t i = 0; i < 20; i++)
+		vec.push_back(i);
+	cout << "size() after push_back : " << vec.size() << endl;
+	cout << "capacity() after push_back : " << vec.capacity() << endl;
 
-	try{vec.erase(vec.begin() + 2);}catch(std::exception &e) { cout << e.what(); }
+	try{vec.erase(vec.begin() + 2); cout<< "erase() done successfully\n";}catch(std::exception &e) { cout << e.what(); }
 }

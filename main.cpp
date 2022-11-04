@@ -143,9 +143,12 @@ int main()
 	cout << "size() after push_back : " << vec.size() << endl;
 	cout << "capacity() after push_back : " << vec.capacity() << endl;
 	//test pop_back
+	cout << "pop_back() : ";
 	for (size_t i = 0; i < 10; i++)
 		vec.pop_back();
 	for (size_t i = 0; i < 10; i++)
 		cout << vec[i] << " ";
-	try{vec.erase(vec.begin() + 2); cout<< "\nerase() done successfully\n";}catch(std::exception &e) { cout << e.what(); }
+	cout << "\n";
+
+	try{vec.erase(vec.begin() , vec.end()); cout<< "\nerase() done successfully\n";}catch(std::exception &e) { cout << e.what(); }
 }

@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/04 11:15:01 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/04 12:39:28 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,37 @@ namespace ft
 					return ;
 				_alloc.destroy(&vectr[size_type - 1]);
 				size_type--;
+			}
+			iterator insert (iterator position, const value_type& val)
+			{
+				difference_type index = position - begin();
+				if (index < 0)
+					throw std::out_of_range("out_of_rang insert()\n");
+				reserve(size_type + 1);
+				size_type += 1;
+				difference_type i = size_type;
+				while (--i)
+				{
+					if (i == index)
+					{
+						_alloc.construct(&vectr[i], val);
+						return (iterator(begin() + index));
+					}
+					_alloc.construct(&vectr[i], vectr[i - 1]);
+				}
+				return begin();
+			}
+			void insert (iterator position, size_t n, const value_type& val)
+			{
+				difference_type index = position - begin();
+				if (index < 0)
+					throw std::out_of_range("out of range insert size_t n\n");
+				// reserve(size_type + n);
+				while (n)
+				{
+					insert(position, val);
+					n--;
+				}
 			}
 			//Operators
 			reference operator[] (size_t n)

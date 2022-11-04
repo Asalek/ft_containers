@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/04 10:59:04 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/04 11:15:01 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,13 @@ namespace ft
 					reserve(_capacity + (this->_capacity / 4));
 				_alloc.construct(vectr + size_type, val);
 				size_type++;
+			}
+			void	pop_back()
+			{
+				if (size_type < 1)
+					return ;
+				_alloc.destroy(&vectr[size_type - 1]);
+				size_type--;
 			}
 			//Operators
 			reference operator[] (size_t n)

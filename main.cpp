@@ -149,6 +149,17 @@ int main()
 	for (size_t i = 0; i < 10; i++)
 		cout << vec[i] << " ";
 	cout << "\n";
+	//test insert
+	vec.insert(vec.begin() + 2, 1);
+	cout << "size() after insert : " << vec.size() << endl;
+	cout << "inserted values : ";
+	for (size_t i = 0; i < vec.size(); i++)
+		cout << vec[i] << " ";
+	cout << "\n";
+	//insert many
+	vec.insert(vec.begin() + 2, 3, 7);
+	for (size_t i = 0; i < vec.size(); i++)
+		cout << vec[i] << " ";
 
 	try{vec.erase(vec.begin() , vec.end()); cout<< "\nerase() done successfully\n";}catch(std::exception &e) { cout << e.what(); }
 }

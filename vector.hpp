@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/04 14:59:11 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/04 17:59:47 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,12 +226,29 @@ namespace ft
 			}
 			void insert (iterator position, size_t n, const value_type& val)
 			{
+				cout <<"V\n";
+				if (n < 0)
+					throw std::out_of_range("out_of_range insert many\n");
 				while (n)
 				{
 					insert(position, val);
 					n--;
 				}
 			}
+			template <class InputIterator>
+			void insert (iterator position, InputIterator first, InputIterator last)
+			{
+				cout << "A\n";
+				// cout << *first << endl;
+				difference_type ddf = last - first;
+				if (ddf < 0)
+					throw std::out_of_range("out_of_range insert many iterators\n");
+				while (first != last)
+				{
+					insert(position, *first);
+					first++;
+				}
+			}m
 			//Operators
 			reference operator[] (size_t n)
 			{

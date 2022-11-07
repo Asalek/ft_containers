@@ -160,6 +160,11 @@ int main()
 	vec.insert(vec.begin() + 2, 3, 7);
 	for (size_t i = 0; i < vec.size(); i++)
 		cout << vec[i] << " ";
+	//insert many with iterators
+	cout << "\n";
+	vec2.insert(vec.begin(), vec.begin() + 2, vec.end());
+	for (size_t i = 0; i < vec.size(); i++)
+		cout << vec[i] << " ";
 
 	try{vec.erase(vec.begin() , vec.end()); cout<< "\nerase() done successfully\n";}catch(std::exception &e) { cout << e.what(); }
 }

@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/08 09:34:19 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:09:26 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ namespace ft
 				}
 			}
 			template <class InputIterator,
-					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::value>
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::value>
 			void insert (iterator position, InputIterator first, InputIterator last)
 			{
 				cout << "A\n";

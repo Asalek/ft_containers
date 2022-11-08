@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/08 10:09:26 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/08 11:14:44 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@ namespace ft
 	{
 		size_t							size_type;
 		public:
-			typedef	T						value_type;
-			typedef Allocator				allocator_type;
-			typedef	T&						reference;
-			typedef	const T&				const_reference;
-			typedef	T*						pointer;
-			typedef	const T*				const_pointer;
-			typedef	ft::random_Iter<T>		iterator;
-			typedef	ft::random_Iter<const T>citerator; //const iterator
-			typedef std::ptrdiff_t			difference_type;
+		typedef	T									value_type;
+		typedef Allocator							allocator_type;
+		typedef	T&									reference;
+		typedef	const T&							const_reference;
+		typedef	T*									pointer;
+		typedef	const T*							const_pointer;
+		typedef	ft::random_Iter<T>					iterator;
+		typedef	ft::random_Iter<const T>			citerator; //const iterator
+		typedef ft::reverse_iterator<T> 			r_iterator;
+		typedef ft::reverse_iterator<const T>		cr_iterator;
+		typedef std::ptrdiff_t						difference_type;
 			//Connstructors & Destructor
 			Vector(const allocator_type& alloc = allocator_type()):size_type(0), _capacity(0)
 			{
@@ -65,6 +67,8 @@ namespace ft
 			//Member Functions
 			iterator		begin() const { return iterator (vectr); };
 			citerator		cbegin() const { return (citerator (vectr)); };
+			r_iterator		rbegin() const {return r_iterator(vectr + size_type - 1); }
+			r_iterator		rend() const {return r_iterator(vectr); }
 			iterator		end() const { return iterator(vectr + size_type - 1); };
 			citerator		cend() const { return citerator(vectr + size_type - 1); };
 			reference		front() {return vectr[0]; };

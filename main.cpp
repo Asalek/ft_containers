@@ -152,19 +152,24 @@ int main()
 	//test insert
 	vec.insert(vec.begin() + 2, 1);
 	cout << "size() after insert : " << vec.size() << endl;
-	cout << "inserted values : ";
+	cout << "inserted values one : ";
 	for (size_t i = 0; i < vec.size(); i++)
 		cout << vec[i] << " ";
 	cout << "\n";
 	//insert many
+	cout << "inserted values many : ";
 	vec.insert(vec.begin() + 2, 3, 7);
 	for (size_t i = 0; i < vec.size(); i++)
 		cout << vec[i] << " ";
-	//insert many with iterators
 	cout << "\n";
-	vec2.insert(vec.begin(), vec.begin() + 2, vec.end());
+	//insert many with iterators
+	cout << "inserted values with iterators : ";
+	Vector<int> v2(4, 144);
+	
+	vec.insert(vec.begin(), v2.begin(), v2.end());
 	for (size_t i = 0; i < vec.size(); i++)
 		cout << vec[i] << " ";
+
 
 	try{vec.erase(vec.begin() , vec.end()); cout<< "\nerase() done successfully\n";}catch(std::exception &e) { cout << e.what(); }
 }

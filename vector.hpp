@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/04 17:59:47 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/08 09:34:19 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "iterators.hpp"
 #include "extra_algos.hpp"
+#include "type_enable.hpp"
 
 using	std::cout;
 using	std::endl;
@@ -235,7 +236,8 @@ namespace ft
 					n--;
 				}
 			}
-			template <class InputIterator>
+			template <class InputIterator,
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::value>
 			void insert (iterator position, InputIterator first, InputIterator last)
 			{
 				cout << "A\n";
@@ -248,7 +250,7 @@ namespace ft
 					insert(position, *first);
 					first++;
 				}
-			}m
+			}
 			//Operators
 			reference operator[] (size_t n)
 			{

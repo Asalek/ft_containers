@@ -44,6 +44,9 @@ The purpose of the allocator is to allocate raw memory without construction of o
 
 SFINAE stands for "substitution failure is not an error."
 
+### Explicit
+
+Explicit Keyword in C++ is used to mark constructors to not implicitly convert types in C++. It is optional for constructors that take exactly one argument and work on constructors(with a single argument) since those are the only constructors that can be used in typecasting.
 
 ## sources :
 
@@ -56,5 +59,7 @@ enable_if :
 C++ tutorial :
 		https://github.com/Asalek/Cpp_Module
 
-Iterator Taraits: it's made for te pointer that not iterators but behave like itertors ::
+Iterator Taraits: it's made for te pointer that not iterators but behave like itertors :
 		https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits
+Explicit :
+		https://www.youtube.com/watch?v=j4iZ50lp9KM

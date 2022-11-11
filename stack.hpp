@@ -12,6 +12,6 @@ namespace ft
 		container_type		c;
 		public:
 			explicit stack (const container_type& ctnr = container_type()) : c(ctnr) {};
-			bool	empty() const {return c.empty(); }
+			bool	empty()  {return c.empty(); }
 	};
 }

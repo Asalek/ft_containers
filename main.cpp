@@ -197,6 +197,12 @@ int main()
 			cout <<"NO\n";
 		//size test
 		cout << "size of second Stack : " << second.size() << endl;
+		//push test
+		second.push(999);
+		//top test
 		cout << "TOP of second Stack : " << second.top() << endl;
+		//pop test
+		second.pop();
+		cout << "TOP after POP of second Stack : " << second.top() << endl;
 	}
 }

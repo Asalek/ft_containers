@@ -20,4 +20,34 @@ namespace ft
 			void push (const value_type& val) {c.push_back(val); };
 			void pop () {c.pop_back(); }
 	};
+	template <class T, class Container>
+	bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{
+		return (lhs.c == rhs.c);
+	}
+	template <class T, class Container>
+	bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{
+		return (lhs.c != rhs.c)
+	}
+	template <class T, class Container>
+	bool operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{
+		return (lhs.c < rhs.c);
+	}
+	template <class T, class Container>
+	bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{
+		return (lhs.c <= rhs.c);
+	}
+	template <class T, class Container>
+	bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{
+		return (lhs.c > rhs.c);
+	}
+	template <class T, class Container>
+	bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs)
+	{
+		return (lhs.c >= rhs.c);
+	}
 }

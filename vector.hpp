@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:50:30 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/11 21:16:10 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/12 15:39:28 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,16 +218,20 @@ namespace ft
 				reserve(size_type + 1);
 				size_type += 1;
 				difference_type i = size_type;
-				while (--i)
+				while (--i >= 0)
 				{
 					if (i == index)
 					{
 						_alloc.construct(&vectr[i], val);
-						return (iterator(begin() + index));
+						return iterator(begin() + index);
 					}
-					_alloc.construct(&vectr[i], vectr[i - 1]);
+					else
+						_alloc.construct(&vectr[i], vectr[i - 1]);
 				}
-				return begin();
+				// for (size_t i = 0; i < size_type; i++)
+    			// 	cout << vectr[i] << ' ' << endl;
+    				cout << size_type << ' ' << endl;
+				return iterator(begin() + index);
 			}
 			void insert (iterator position, size_t n, const value_type& val)
 			{

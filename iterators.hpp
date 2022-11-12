@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/08 15:14:15 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/12 14:42:30 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ namespace ft
 	{
 		private:
 			Type *_ptr;
+			// Typee _ptr;
 		public:
 			typedef typename std::iterator<std::random_access_iterator_tag, Type>::difference_type difference_type;
 
@@ -77,7 +78,7 @@ namespace ft
 			inline difference_type operator-(const random_Iter& rhs) const {return _ptr-rhs._ptr;}
 			inline random_Iter operator+(difference_type rhs) const {return random_Iter(_ptr+rhs);}
 			inline random_Iter operator-(difference_type rhs) const {return random_Iter(_ptr-rhs);}
-			Type	base() const {return *_ptr;}
+			Type	*base() const {return _ptr;}
 			// friend inline random_Iter operator+(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs+rhs._ptr);}
 			// friend inline random_Iter operator-(difference_type lhs, const random_Iter& rhs) {return random_Iter(lhs-rhs._ptr);}
 	};
@@ -92,6 +93,7 @@ namespace ft
 	bool operator==(const random_Iter<Iter> &lhs, const random_Iter<Iter> &rhs)
 	{
 		return (lhs.base() == rhs.base());
+		
 	}
 
 	template <class Iter>

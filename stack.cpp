@@ -1,4 +1,5 @@
 #include "stack.hpp"
+#include <vector>
 
 using namespace ft;
 
@@ -8,7 +9,8 @@ int main()
 
 	ft::stack<int> first;                    // empty stack
 	ft::stack<int> second (myvector);         // stack initialized to copy of deque
-	
+	std::vector<int>::iterator it;
+	it.base();
 	//empty test
 	cout << "Stack Second empty ? :";
 	if(second.empty())

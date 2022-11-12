@@ -98,7 +98,7 @@ int main()
 		cout << endl;
 		for (size_t i = 0; i < 6; i++)
 			cout << "vec2 :" << vec2[i] <<  ",";
-		ft::swap(vec, vec2);
+		std::swap(vec, vec2);
 	}
 
 	{

@@ -2,4 +2,5 @@
 container
 *.exe
 .DS_Store
+a.out
 To_Do_Next.ne

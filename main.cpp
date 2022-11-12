@@ -1,10 +1,16 @@
 #include "vector.hpp"
+#include "stack.hpp"
 #include <vector>
 
 using namespace ft;
 
 int main()
 {
+	//				****************************
+	//						  √乇꒟丁口尺
+	//				****************************
+
+	cout <<"\n"<<"▁▂▄▅▆▇█ ᐯEᑕTOᖇ █▇▆▅▄▂▁"<< endl << endl;
 	//test constructors and fill container
 	Vector<string> vec0(5, "asalek");
 	Vector<int> vec(5, 77);
@@ -169,7 +175,27 @@ int main()
 	vec.insert(vec.begin(), v2.begin(), v2.end());
 	for (size_t i = 0; i < vec.size(); i++)
 		cout << vec[i] << " ";
-
-
 	try{vec.erase(vec.begin() , vec.end()); cout<< "\nerase() done successfully\n";}catch(std::exception &e) { cout << e.what(); }
+
+	//				****************************
+	//						  丂丁闩꒟ズ
+	//				****************************
+
+	cout <<"\n"<<"▁▂▄▅▆▇█ 𐌔𐌕𐌀𐌂𐌊 █▇▆▅▄▂▁"<< endl << endl;
+	{
+		ft::Vector<int> myvector (2,200);        // vector with 2 elements
+
+		ft::stack<int> first;                    // empty stack
+		ft::stack<int> second (myvector);         // stack initialized to copy of deque
+		std::vector<int>::iterator it;
+		it.base();
+		//empty test
+		cout << "Stack Second empty ? :";
+		if(second.empty())
+			cout <<"YES\n";
+		else
+			cout <<"NO\n";
+		//size test
+		cout << "size of second Stack : " << second.size() << endl;
+	}
 }

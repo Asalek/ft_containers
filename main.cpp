@@ -197,5 +197,6 @@ int main()
 			cout <<"NO\n";
 		//size test
 		cout << "size of second Stack : " << second.size() << endl;
+		cout << "TOP of second Stack : " << second.top() << endl;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/12 14:42:30 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:12:16 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,4 +199,36 @@ namespace ft
 	{
 		return (lhs.base() - rhs.base());
 	}
+
+	//tree iterator
+	template<class Iter, class T>
+	class tree_iterator : public iterator<std::bidirectional_iterator_tag>
+	{
+		Iter	_current;	//pointer that iterat on key not the value
+		public:
+			tree_iterator():_current(nullptr) {}
+			tree_iterator(Iter _x) : _current(x) {}
+			template<class z, class y>
+			tree_iterator(tree_iterator<z, y> &other) : _current(other._current) {}
+			template<class z, class y>
+			tree_iterator &operator=(tree_iterator<z, y> &other)
+			{
+				this->_current = other.base();
+				return *this;
+			}
+			template<class Iter1, class T1>
+			bool	operator==(tree_iterator<Iter1, T1> &other)
+			{ return (_current == other.base()); }
+			template<class Iter1, class T1>
+			bool	operator!=(tree_iterator<Iter1, T1> &other)
+			{ return !(_current == other.base()); }
+			Iter	base() const { return this->_current; }
+			T&		operator*() const { return this->_current->data; }
+			T*		operator->() const { return &(_current->data); }
+	};
 }
+
+//    int a = 12;
+//    int *b = &a;
+//    int &c = *b;
+//    cout <<c<<endl;//12

@@ -1,45 +1,21 @@
 #pragma once
 
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::string;
+
 namespace ft
 {
-    template <class k, class v>
-    class redBlackTree
-    {
-	public:
-		size_t	size;
-		Node<k, v>	root;
-
-		class Node <k, v>
-        {
-            k			key;
-            v			value;
-            Node<k, v>	left, right, parent;
-            bool		isLeftChild, black;
-			Node (k key, v value)
-			{
-				this->key = key;
-				this->value = value;
-				left = right = parent = nullptr;	//if parent null mean node is root
-				black = false;		//new nodes are red
-				isLeftChild = false;
-			}
-        };
-		void add(k key, v value)
-		{
-			Node<k, v> node = new Node<k, v>(key, value);
-			if (root == nullptr)  //if !root make it root
-			{
-				root = node;
-				root.black = true;
-				size++;
-				return ;
-			}
-			add(root, node);//if root, we passed it with the new node to place it properly
-			size++;
-		}
-	private:
-		void add (Node<k, v>root, Node<k, v> newNode)
-		{
-		}
-    };
+	// Implementing Red-Black Tree in C++
+	template<class T>
+	struct Node {
+		T data;
+		Node *parent;
+		Node *left;
+		Node *right;
+		int color;
+		Node():data(nullptr), parent(nullptr), left(nullptr), right(nullptr), color(0){}
+		Node(T _data):data(_data), parent(nullptr), left(nullptr), right(nullptr), color(0){}
+	};
 }

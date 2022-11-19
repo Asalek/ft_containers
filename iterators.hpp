@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/17 16:12:16 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/17 20:31:18 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,18 +217,29 @@ namespace ft
 				return *this;
 			}
 			template<class Iter1, class T1>
-			bool	operator==(tree_iterator<Iter1, T1> &other)
-			{ return (_current == other.base()); }
+			bool	operator==(tree_iterator<Iter1, T1> &other) { return (_current == other.base()); }
 			template<class Iter1, class T1>
-			bool	operator!=(tree_iterator<Iter1, T1> &other)
-			{ return !(_current == other.base()); }
+			bool	operator!=(tree_iterator<Iter1, T1> &other) { return !(_current == other.base()); }
 			Iter	base() const { return this->_current; }
 			T&		operator*() const { return this->_current->data; }
 			T*		operator->() const { return &(_current->data); }
+		private:
+			Iter	minimum_left(Iter node) const		//return the left node in the tree
+			{
+				while (node->left != nullptr)
+					node = node->left;
+				return (node);
+			}
+			Iter	maximum_right(Iter node) const		//return the right node in the tree
+			{
+				while (node->right != nullptr)
+					node = node->right;
+				return (node);
+			}
 	};
 }
-
+//successor (max in the right subtree). predess(min in left)
 //    int a = 12;
 //    int *b = &a;
 //    int &c = *b;
-//    cout <<c<<endl;//12
+//    cout <<c<<endl;   //12

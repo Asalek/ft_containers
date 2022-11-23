@@ -9,29 +9,50 @@ namespace ft
 {
 	// Implementing Red-Black Tree in C++
 	template<class T>
-	struct Node {
+	struct node {
 		T data;
-		Node *parent;
-		Node *left;
-		Node *right;
+		node *parent;
+		node *left;
+		node *right;
 		int color;
-		Node():data(nullptr), parent(nullptr), left(nullptr), right(nullptr), color(0){}
-		Node(T _data):data(_data), parent(nullptr), left(nullptr), right(nullptr), color(0){}
+		node():data(nullptr), parent(nullptr), left(nullptr), right(nullptr), color(0){}
+		node(T _data):data(_data), parent(nullptr), left(nullptr), right(nullptr), color(0){}
+	};
+	template <class T, class Compare = std::less<T>, class Alloc = std::allocator<T> >
+	class RedBlackTree
+	{
+		public:
+			typedef ft::node*	node_pointer;
+			typedef T		value_type;
+		private:
+			node_pointer	root;
+			node_pointer	end;
+			size_t			size;
+
+			//	insertion
+			void	insert(value_type data = value_type())
+			{
+				if (this->root == nullptr)
+				{
+					this->size++;
+				}
+			}
 	};
 
-int main() {
-  RedBlackTree<int> bst;
-  bst.insert(55);
-  bst.insert(40);
-  bst.insert(65);
-  bst.insert(60);
-  bst.insert(75);
-  bst.insert(57);
+	int main()
+	{
+		RedBlackTree<int> bst;
+		bst.insert(55);
+		bst.insert(40);
+		bst.insert(65);
+		bst.insert(60);
+		bst.insert(75);
+		bst.insert(57);
 
-  bst.printTree();
-  cout << endl
-     << "After deleting" << endl;
-  bst.deleteNode(40);
-  bst.printTree();
-}
+		bst.printTree();
+		cout << endl
+			<< "After deleting" << endl;
+		bst.deleteNode(40);
+		bst.printTree();
+	}
 }

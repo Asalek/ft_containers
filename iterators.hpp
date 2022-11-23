@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/17 20:31:18 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/21 19:16:48 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,21 +224,45 @@ namespace ft
 			T&		operator*() const { return this->_current->data; }
 			T*		operator->() const { return &(_current->data); }
 		private:
-			Iter	minimum_left(Iter node) const		//return the left node in the tree
+			Iter	minimum(Iter node) const		//return the left node in the tree
 			{
 				while (node->left != nullptr)
 					node = node->left;
 				return (node);
 			}
-			Iter	maximum_right(Iter node) const		//return the right node in the tree
+			Iter	maximum(Iter node) const		//return the right node in the tree
 			{
 				while (node->right != nullptr)
 					node = node->right;
 				return (node);
 			}
+			Iter	successor(Iter node)
+			{
+				if (node->right != nullptr)
+					return (minimum(node->right));
+				Iter x = node->parent;
+				while (x != nullptr && node == x->right)
+				{
+					node = x;
+					x = x->parent;
+				}
+				return (x);
+			}
+			Iter	predecessor(Iter node)
+			{
+				if (node->left != nullptr)
+					return (maximum(node->left));
+				Iter x = node->parent;
+				while (x != nullptr && node == x->left)
+				{
+					node = x;
+					x = x->parent;
+				}
+				return (x);
+			}
 	};
 }
-//successor (max in the right subtree). predess(min in left)
+
 //    int a = 12;
 //    int *b = &a;
 //    int &c = *b;

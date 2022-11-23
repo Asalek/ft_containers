@@ -63,3 +63,6 @@ Iterator Taraits: it's made for te pointer that not iterators but behave like it
 		https://www.codeproject.com/Articles/36530/An-Introduction-to-Iterator-Traits
 Explicit :
 		https://www.youtube.com/watch?v=j4iZ50lp9KM
+
+Map Iterator :
+		https://stackoverflow.com/questions/12259571/how-does-the-stdmap-iterator-work

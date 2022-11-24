@@ -121,9 +121,38 @@ namespace ft
 								f = f->parent;
 								// leftRotate(f);
 							}
+							//Set color of p as BLACK and color of gP as RED and right rotate gP
+							f->parent->color = BLACK;
+							f->parent->parent->color = RED;
+							// rightRotate(f->parent->parent);
+							break ;
+						}
+					}
+					else
+					{
+						node_pointer annt = f->parent->parent->left;
+						if (annt != nullptr && annt->color == RED)
+						{
+							f->parent->color = BLACK;
+							annt->color = BLACK;
+							f->parent->parent->color = RED;
+							f = f->parent->parent;
+						}
+						else
+						{
+							if (f == f->parent->left)
+							{
+								f = f->parent;
+								// rightRotate(f);
+							}
+							f->parent->color = BLACK;
+							f->parent->parent->color = RED;
+							// leftRotate(f->parent->parent);
+							break ;
 						}
 					}
 				}
+				this->root->color = BLACK;
 			}
 	};
 

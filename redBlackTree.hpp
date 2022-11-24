@@ -91,6 +91,40 @@ namespace ft
 				this->root->parent = this->end;
 				//fixAfterInsert(new_node);
 			}
+			void	fixAfterInsert(node_pointer f)
+			{
+				while (f->parent && f->parent->color == RED)
+				{
+					/*If f parent is the left child of grandParent , do the following.*/
+					if (f->parent == f->parent->parent->left)
+					{
+						node_pointer annt = f->parent->parent->right;
+						//CASE I
+
+						/*	If the color of the right child of gP of newNode is RED, 
+						set the color of both the children of gP as BLACK and the color of gP as RED.	*/
+						if (annt != nullptr && annt->color == RED)
+						{
+							f->parent->color = BLACK;
+							annt->color = BLACK;
+							f->parent->parent->color = RED;
+							f = f->parent->parent;			// point to the grand parent to fix it
+						}
+						//CASE II
+
+						/*	if newNode is the right child of p then assign p to newNode (f)
+						and left rotate newNode (f)	*/
+						else
+						{
+							if (f = f->parent->right)
+							{
+								f = f->parent;
+								// leftRotate(f);
+							}
+						}
+					}
+				}
+			}
 	};
 
 	int main()

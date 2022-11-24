@@ -66,3 +66,5 @@ Explicit :
 
 Map Iterator :
 		https://stackoverflow.com/questions/12259571/how-does-the-stdmap-iterator-work
+Rebind		:
+		https://stackoverflow.com/questions/14148756/what-does-template-rebind-do

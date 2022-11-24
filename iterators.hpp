@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/21 19:16:48 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:03:30 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,28 @@ namespace ft
 			Iter	base() const { return this->_current; }
 			T&		operator*() const { return this->_current->data; }
 			T*		operator->() const { return &(_current->data); }
+			tree_iterator operator++(int)
+			{
+				tree_iterator tmp(*this);
+				this->_current = successor(this->_current);
+				return (tmp);
+			}
+			tree_iterator & operator++()
+			{
+				this->_current = successor(this->_current);
+				return (*this);
+			}
+			tree_iterator operator--(int)
+			{
+				tree_iterator tmp(*this);
+				this->_current = predecessor(this->_current);
+				return tmp;
+			}
+			tree_iterator & operator--()
+			{
+				this->_current = predecessor(this->_current);
+				return *this;
+			}
 		private:
 			Iter	minimum(Iter node) const		//return the left node in the tree
 			{

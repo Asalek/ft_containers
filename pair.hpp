@@ -9,7 +9,7 @@ namespace ft
 		typedef T2	second_type;
 		first_type	first;
 		second_type	second;
-		pair():key(), value(){}
+		pair():first(), second(){}
 		template<class U, class V>
 		pair (const pair<U,V>& pr)
 		{
@@ -30,7 +30,7 @@ namespace ft
 	};
 	template <class T1, class T2>
 	pair<T1, T2> make_pair (T1 x, T1 y)
-	{ return ( pair<T1, T2>(x, y); ); }
+	{ return ( pair<T1, T2>(x, y) ); }
 	template <class T1, class T2>
 	bool operator== (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
 	{ return lhs.first==rhs.first && lhs.second==rhs.second; }

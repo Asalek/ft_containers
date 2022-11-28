@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/24 17:03:30 by asalek           ###   ########.fr       */
+/*   Updated: 2022/11/28 18:20:58 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,12 +202,13 @@ namespace ft
 
 	//tree iterator
 	template<class Iter, class T>
-	class tree_iterator : public iterator<std::bidirectional_iterator_tag>
+	class tree_iterator : public std::iterator<std::bidirectional_iterator_tag,
+					typename ft::iterator_traits<T>::value_type>
 	{
 		Iter	_current;	//pointer that iterat on key not the value
 		public:
 			tree_iterator():_current(nullptr) {}
-			tree_iterator(Iter _x) : _current(x) {}
+			tree_iterator(Iter x) : _current(x) {}
 			template<class z, class y>
 			tree_iterator(tree_iterator<z, y> &other) : _current(other._current) {}
 			template<class z, class y>

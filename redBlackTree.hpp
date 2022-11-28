@@ -119,18 +119,21 @@ namespace ft
 							if (f = f->parent->right)
 							{
 								f = f->parent;
-								// leftRotate(f);
+								leftRotate(f);
 							}
 							//Set color of p as BLACK and color of gP as RED and right rotate gP
 							f->parent->color = BLACK;
 							f->parent->parent->color = RED;
-							// rightRotate(f->parent->parent);
+							rightRotate(f->parent->parent);
 							break ;
 						}
 					}
 					else
 					{
 						node_pointer annt = f->parent->parent->left;
+						/*If the color of the left child of gP of z is RED,
+						set the color of both the children of gP as BLACK and the color of gP as RED,
+						and assign gP to newNode*/
 						if (annt != nullptr && annt->color == RED)
 						{
 							f->parent->color = BLACK;
@@ -140,14 +143,18 @@ namespace ft
 						}
 						else
 						{
+							/*Else if newNode is the left child of p then,
+							assign p to newNode and Right-Rotate newNode.
+							then Set color of p as BLACK and color of gP as RED
+							and left rotate gP*/
 							if (f == f->parent->left)
 							{
 								f = f->parent;
-								// rightRotate(f);
+								rightRotate(f);
 							}
 							f->parent->color = BLACK;
 							f->parent->parent->color = RED;
-							// leftRotate(f->parent->parent);
+							leftRotate(f->parent->parent);
 							break ;
 						}
 					}

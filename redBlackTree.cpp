@@ -230,6 +230,42 @@ using std::string;
 				y->right = x;
 				x->parent = y; 
 			}
+			node_pointer	minimum(node_pointer node) const		//return the left node in the tree
+			{
+				while (node->left != nullptr)
+					node = node->left;
+				return (node);
+			}
+			node_pointer	maximum(node_pointer node) const		//return the right node in the tree
+			{
+				while (node->right != nullptr)
+					node = node->right;
+				return (node);
+			}
+			node_pointer	successor(node_pointer node)
+			{
+				if (node->right != nullptr)
+					return (minimum(node->right));
+				node_pointer x = node->parent;
+				while (x != nullptr && node == x->right)
+				{
+					node = x;
+					x = x->parent;
+				}
+				return (x);
+			}
+			node_pointer	predecessor(node_pointer node)
+			{
+				if (node->left != nullptr)
+					return (maximum(node->left));
+				node_pointer x = node->parent;
+				while (x != nullptr && node == x->left)
+				{
+					node = x;
+					x = x->parent;
+				}
+				return (x);
+			}
 			void	transplant(node_pointer del, node_pointer child) // emplace nodeToBeDeleted with it's children's
 			{
 				if (del->parent == nullptr)
@@ -246,6 +282,7 @@ using std::string;
 			{
 				node_pointer Del;
 				node_pointer x;
+				node_pointer y;
 
 				if (!root || (Del = find(value)) == nullptr)
 					return ;

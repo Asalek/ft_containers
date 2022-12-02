@@ -286,9 +286,10 @@ using std::string;
 
 				if (!root || (Del = find(value)) == nullptr)
 					return ;
+				size--;
 				//Save the color of nodeToBeDeleted in origrinalColor
 				bool originalColor = Del->color;
-				//If the left child of Deleted is NULL, Assign the right child of Deleted to x
+				//If the left child of Deleted is NIL
 				if (Del->left == nullptr)
 				{
 					x = Del->right;
@@ -296,16 +297,37 @@ using std::string;
 					_alloc.destroy(Del);
 					_alloc.deallocate(Del, 1);
 				}
-				else if (Del->right == nullptr)
+				else if (Del->right == nullptr)// right child is NIL
 				{
 					x = Del->left;
 					transplant(Del, Del->left);
 					_alloc.destroy(Del);
 					_alloc.deallocate(Del, 1);
 				}
-				else
+				else //neither child is NIL
 				{
-					
+					y = minimum(Del->right);
+					originalColor = y->color;
+					x = y->right;
+					if (y->parent != nullptr && y->parent != Del)
+					{
+						transplant(y, y->right);//(y, x);
+						y->right = Del->right;
+						y->right->parent = y;
+					}
+					transplant(Del, y);
+					y->left = Del->left;
+					y->left->parent = y;
+					y->color = Del->color;
+					_alloc.destroy(Del);
+					_alloc.deallocate(Del, 1);
+				}
+				if (originalColor == BLACK && x != nullptr)
+					//erase_fixup(x);
+				if (root != nullptr)
+				{
+					end->left = root;
+					root->parent = end;
 				}
 			}
 	};

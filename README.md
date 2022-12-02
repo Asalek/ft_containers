@@ -68,3 +68,13 @@ Map Iterator :
 		https://stackoverflow.com/questions/12259571/how-does-the-stdmap-iterator-work
 Rebind		:
 		https://stackoverflow.com/questions/14148756/what-does-template-rebind-do
+RED_BLACK_TREE:
+	red black tree algorithme :
+		https://www.programiz.com/dsa/red-black-tree
+	insertion:
+		https://www.programiz.com/dsa/insertion-in-a-red-black-tree
+	delete :
+		https://www.youtube.com/watch?v=lU99loSvD8s&ab_channel=MichaelSambol
+	fix after delete :
+		https://www.youtube.com/watch?v=iw8N1_keEWA&ab_channel=MichaelSambol
+	

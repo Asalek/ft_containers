@@ -48,6 +48,16 @@ SFINAE stands for "substitution failure is not an error."
 
 Explicit Keyword in C++ is used to mark constructors to not implicitly convert types in C++. It is optional for constructors that take exactly one argument and work on constructors(with a single argument) since those are the only constructors that can be used in typecasting.
 
+### RED_BLACK_TREE
+
+1. A node is either red or black
+2. The root and leaves (NIL) are black
+3. if a node is red, then its children are black
+4. All paths from a node to its NIL descendants contain the same number of black nodes
+
+
+- RED_BLACK_TREE time complexity is O(log n)
+
 ## sources :
 
 SFINAE :
@@ -69,6 +79,8 @@ Map Iterator :
 Rebind		:
 		https://stackoverflow.com/questions/14148756/what-does-template-rebind-do
 RED_BLACK_TREE:
+	Insertion_Deletions_Fixes :
+		https://www.youtube.com/watch?v=qvZGUFHWChY&list=PL9xmBV_5YoZNqDI8qfOZgzbqahCUmUEin&ab_channel=MichaelSambol
 	red black tree algorithme :
 		https://www.programiz.com/dsa/red-black-tree
 	insertion:

@@ -36,6 +36,7 @@ using std::string;
 			allocator_type _alloc;
 			node_pointer	root;
 			node_pointer	end;
+			node_pointer	NIL;
 			value_compare	_comp;
 			size_t			size;
 
@@ -49,6 +50,12 @@ using std::string;
 		RedBlackTree(): root(nullptr), end(nullptr), size(0), _comp()
 		{
 			end = this->makenode();
+			NIL = this->makenode();
+			NIL->left = nullptr;
+			NIL->right = nullptr;
+			NIL->parent = nullptr;
+			NIL->color = BLACK;
+			root = NIL;
 		}
 		RedBlackTree(value_compare _comp, allocator_type _alloc): root(nullptr), end(), _alloc(_alloc), _comp(_comp), size(0)
 		{
@@ -60,7 +67,7 @@ using std::string;
 			*this = _tr;
 		}
 		  void printHelper(node_pointer nodee, string indent, bool last) {
-		    if (nodee != nullptr)
+		    if (nodee != NIL)
 			{
 				cout << indent;
 				if (last) {
@@ -91,7 +98,7 @@ using std::string;
 			node_pointer	find(const value_type &data) const
 			{
 				node_pointer current = this->root;
-				while (current != nullptr)
+				while (current != NIL)
 				{
 					if (!_comp(current->data, data) && !_comp(data, current->data))
 						break ; //!(data < c.data) && !(c.data < data) => data = c.data
@@ -100,39 +107,49 @@ using std::string;
 				return current;
 			}
 			//	insertion
-			void	insert(value_type data = value_type())
+			void insert(value_type data = value_type())
 			{
-				if (this->root == nullptr) //if !root make it
-				{
-					this->root = makenode(data);
-					root->parent = this->end;
-					this->end->left = this->root;
-					this->size++;
-					this->root->color = BLACK;
-					return ;
+				// Ordinary Binary Search Insertion
+				node_pointer node = makenode(data);
+				node->parent = nullptr;
+				node->data = data;
+				node->left = NIL;
+				node->right = NIL;
+				node->color = RED; // new node must be red
+
+				node_pointer y = nullptr;
+				node_pointer x = this->root;
+
+				while (x != NIL) {
+					y = x;
+					if (node->data < x->data) {
+						x = x->left;
+					} else {
+						x = x->right;
+					}
 				}
-				if (find(data) != nullptr) // if data exist don't insert it
-					return ;
-				this->end->left = nullptr;//remove it later
-				root->parent = nullptr;
-				node_pointer new_node = makenode(data);
-				node_pointer parent = nullptr;
-				node_pointer node_root = this->root;
-				new_node->color = RED;
-				while (node_root != nullptr) // go to data position
-				{
-					parent = node_root;
-					node_root = (_comp(new_node->data, node_root->data)) ? node_root->left : node_root->right;
-					new_node->parent = parent;
+
+				// y is parent of x
+				node->parent = y;
+				if (y == nullptr) {
+					root = node;
+				} else if (node->data < y->data) {
+					y->left = node;
+				} else {
+					y->right = node;
 				}
-				if (_comp(new_node->data, parent->data)) //  newNode goes left or right
-					parent->left = new_node;
-				else
-					parent->right = new_node;
-				fixAfterInsert(new_node);
-				this->size++;
-				this->end->left = this->root;
-				this->root->parent = this->end;
+
+				// if new node is a root node, simply return
+				if (node->parent == nullptr){
+					node->color = BLACK;
+					return;
+				}
+
+				// if the grandparent is null, simply return
+				if (node->parent->parent == nullptr) {
+					return;
+				}
+				fixAfterInsert(node);
 			}
 			void	fixAfterInsert(node_pointer f)
 			{
@@ -208,7 +225,7 @@ using std::string;
 			{
 				node_pointer y = x->right;
 				x->right = y->left;
-				if (y->left != nullptr)
+				if (y->left != NIL)
 					y->left->parent = x;
 				y->parent = x->parent;
 				if (x->parent == nullptr)
@@ -224,7 +241,7 @@ using std::string;
 			{
 				node_pointer y = x->left;
 				x->left = y->right;
-				if (y->right != nullptr)
+				if (y->right != NIL)
 					y->right->parent = x;
 				y->parent = x->parent;
 				if (x->parent == nullptr)
@@ -238,19 +255,19 @@ using std::string;
 			}
 			node_pointer	minimum(node_pointer node) const		//return the left node in the tree
 			{
-				while (node->left != nullptr)
+				while (node->left != NIL)
 					node = node->left;
 				return (node);
 			}
 			node_pointer	maximum(node_pointer node) const		//return the right node in the tree
 			{
-				while (node->right != nullptr)
+				while (node->right != NIL)
 					node = node->right;
 				return (node);
 			}
 			node_pointer	successor(node_pointer node)
 			{
-				if (node->right != nullptr)
+				if (node->right != NIL)
 					return (minimum(node->right));
 				node_pointer x = node->parent;
 				while (x != nullptr && node == x->right)
@@ -262,7 +279,7 @@ using std::string;
 			}
 			node_pointer	predecessor(node_pointer node)
 			{
-				if (node->left != nullptr)
+				if (node->left != NIL)
 					return (maximum(node->left));
 				node_pointer x = node->parent;
 				while (x != nullptr && node == x->left)
@@ -299,25 +316,15 @@ using std::string;
 				//Save the color of nodeToBeDeleted in origrinalColor
 				bool originalColor = Del->color;
 				//If the left child of Deleted is NIL
-				if (Del->left == nullptr)
+				if (Del->left == NIL)
 				{
-					cout << "DEL__1\n";
 					x = Del->right;
-					// if (x == nullptr)
-					// {
-					// 	x = this->end;
-					// 	x->left = nullptr;
-					// 	x->right = nullptr;
-					// 	x->color = BLACK;
-					// 	x->parent = Del->parent;
-					// }
 					transplant(Del, x);
 					_alloc.destroy(Del);
 					_alloc.deallocate(Del, 1);
 				}
-				else if (Del->right == nullptr)// right child is NIL
+				else if (Del->right == NIL)// right child is NIL
 				{
-					cout << "DEL__2\n";
 					x = Del->left;
 					transplant(Del, x);
 					_alloc.destroy(Del);
@@ -325,7 +332,6 @@ using std::string;
 				}
 				else //neither child is NIL
 				{
-					cout << "DEL__3\n";
 					y = minimum(Del->right);
 					originalColor = y->color;
 					x = y->right;
@@ -342,11 +348,8 @@ using std::string;
 					_alloc.destroy(Del);
 					_alloc.deallocate(Del, 1);
 				}
-				if (originalColor == BLACK && x != nullptr)
-				{
-				 	cout <<"**\n";
+				if (originalColor == BLACK)// && x != nullptr)
 					erase_fixup(x);
-				}
 				if (root != nullptr)
 				{
 					end->left = root;
@@ -360,90 +363,84 @@ using std::string;
 					3_ w is black, and w->left is red and w->right is black
 					4_ w is black, and w->right is red
 			*/
-			void	erase_fixup(node_pointer x)
+			void erase_fixup(node_pointer x)
 			{
-				node_pointer w;
-				cout << "XX\n";
-				cout << x->color <<"<===color\n";
-				while (x != this->root && x->color == BLACK)
-				{
-					if (x != nullptr && x == x->parent->left)
+				node_pointer s;
+				while (x != root && x->color == BLACK) {
+					if (x == x->parent->left)
 					{
-						w = x->parent->right;
-						//case 1
-						if (w != nullptr && w->color == RED)
+						s = x->parent->right;
+						if (s->color == RED)
 						{
-							w->color = BLACK;
+							// case 3.1
+							s->color = BLACK;
 							x->parent->color = RED;
-							this->leftRotate(x->parent);
-							w = x->parent->right;
+							leftRotate(x->parent);
+							s = x->parent->right;
 						}
-						//case 2
-						if (w != nullptr &&
-							w->color == BLACK
-							&& w->left->color == BLACK
-							&& w->right->color == BLACK)
+						if (s->left->color == BLACK && s->right->color == BLACK)
 						{
-							cout << "XX\n";
-							w->color = RED;
+							// case 3.2
+							s->color = RED;
 							x = x->parent;
 						}
-						//case 3
-						else
+					else
+					{
+						if (s->right->color == BLACK)
 						{
-							if (w->right->color == BLACK)
-							{
-								w->left->color = BLACK;
-								w->color = RED;
-								this->rightRotate(w);
-								w = x->parent->right;
-							}
-							//case 4
-							w->color = x->parent->color;
-							x->parent->color = BLACK;
-							w->right->color = BLACK;
-							this->leftRotate(x->parent);
-							x = this->root;
+							// case 3.3
+							s->left->color = BLACK;
+							s->color = RED;
+							s = x->parent->right;
 						}
+						// case 3.4
+						s->color = x->parent->color;
+						x->parent->color = BLACK;
+						s->right->color = BLACK;
+						leftRotate(x->parent);
+						x = root;
+					}
+				}
+				else
+				{
+					s = x->parent->left;
+					if (s->color == RED)
+					{
+						// case 3.1
+						s->color = BLACK;
+						x->parent->color = RED;
+						rightRotate(x->parent);
+						s = x->parent->left;
+					}
+
+					if (s->right->color == BLACK && s->right->color == BLACK)
+					{
+						// case 3.2
+						s->color = RED;
+						x = x->parent;
 					}
 					else
 					{
-						w = x->parent->left;
-						//case 1
-						if (w && w->color == RED)
+						if (s->left->color == BLACK)
 						{
-							w->color = BLACK;
-							x->parent->color = RED;
-							this->rightRotate(x->parent);
-							w = x->parent->left;
+							// case 3.3
+							s->right->color = BLACK;
+							s->color = RED;
+							leftRotate(s);
+							s = x->parent->left;
 						}
-						//case 2
-						if (w->left->color == BLACK && w->right->color == BLACK)
-						{
-							w->color = RED;
-							x = x->parent;
-						}
-						//case 3
-						else
-						{
-							if (w->left->color == BLACK)
-							{
-								w->right->color = BLACK;
-								w->color = RED;
-								this->leftRotate(w);
-								w = x->parent->left;
-							}
-							//case 4
-							w->color = x->parent->color;
-							x->parent->color = BLACK;
-							w->left->color = BLACK;
-							this->rightRotate(x->parent);
-							x = this->root;
-						}
+
+						// case 3.4
+						s->color = x->parent->color;
+						x->parent->color = BLACK;
+						s->left->color = BLACK;
+						rightRotate(x->parent);
+						x = root;
 					}
-				}
-				x->color = BLACK;
-			}
+				} 
+		}
+		x->color = BLACK;
+	}
 	};
 
 	int main()

@@ -120,35 +120,35 @@ using std::string;
 				node_pointer y = nullptr;
 				node_pointer x = this->root;
 
-				while (x != NIL) {
+				while (x != NIL)
+				{
 					y = x;
-					if (node->data < x->data) {
+					if (node->data < x->data)
 						x = x->left;
-					} else {
+					else
 						x = x->right;
-					}
 				}
 
 				// y is parent of x
 				node->parent = y;
-				if (y == nullptr) {
+				if (y == nullptr)
 					root = node;
-				} else if (node->data < y->data) {
+				else if (node->data < y->data)
 					y->left = node;
-				} else {
+				else
 					y->right = node;
-				}
 
 				// if new node is a root node, simply return
-				if (node->parent == nullptr){
+				if (node->parent == nullptr)
+				{
 					node->color = BLACK;
 					return;
 				}
 
 				// if the grandparent is null, simply return
-				if (node->parent->parent == nullptr) {
+				if (node->parent->parent == nullptr)
 					return;
-				}
+
 				fixAfterInsert(node);
 			}
 			void	fixAfterInsert(node_pointer f)
@@ -161,7 +161,7 @@ using std::string;
 						node_pointer annt = f->parent->parent->right;
 						//CASE I
 
-						/*	If the color of the right child of gP of newNode is RED, 
+						/*	If right child of annt of newNode is RED, 
 						set the color of both the children of gP as BLACK and the color of gP as RED.	*/
 						if (annt != nullptr && annt->color == RED)
 						{

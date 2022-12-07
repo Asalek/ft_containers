@@ -109,7 +109,10 @@ using std::string;
 			//	insertion
 			void insert(value_type data = value_type())
 			{
-				// Ordinary Binary Search Insertion
+				//if data exist don't insert
+				if (find(data) != NIL)
+					return ;
+
 				node_pointer node = makenode(data);
 				node->parent = nullptr;
 				node->data = data;
@@ -123,10 +126,7 @@ using std::string;
 				while (x != NIL)
 				{
 					y = x;
-					if (node->data < x->data)
-						x = x->left;
-					else
-						x = x->right;
+					x = (node->data < x->data) ? x->left : x->right;
 				}
 
 				// y is parent of x
@@ -337,11 +337,11 @@ using std::string;
 					x = y->right;
 					if (y->parent != nullptr && y->parent != Del)
 					{
-						transplant(y, y->right);//(y, x);
+						transplant(y, y->right);//transplant the minimum to right (y) with it child
 						y->right = Del->right;
 						y->right->parent = y;
 					}
-					transplant(Del, y);
+					transplant(Del, y);		//transplant y with node to delete
 					y->left = Del->left;
 					y->left->parent = y;
 					y->color = Del->color;

@@ -31,6 +31,7 @@ using std::string;
 			typedef struct node<value_type> node;
 			typedef node*	node_pointer;
 			typedef typename Alloc::template rebind<node>::other	allocator_type;	//switch allocater type from T to node
+			typedef	ft::tree_iterator<node_pointer>	iterator;
 			// Without the template keyword the < would be considered to be the less-than operator
 		private:
 			allocator_type _alloc;
@@ -452,6 +453,12 @@ using std::string;
 				this->_alloc.deallocate(x, 1);
 			}
 		}
+		void clear()
+		{
+			this->destroy(this->root);
+			this->root = nullptr;
+			this->size= 0;
+		}
 	};
 
 	int main()
@@ -469,6 +476,7 @@ using std::string;
 			<< "After deleting" << endl;
 		bst.deleteNode(40);
 		bst.printTree();
+		bst.clear();
 		return 0;
 	}
 // }

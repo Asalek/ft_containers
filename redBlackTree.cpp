@@ -442,6 +442,16 @@ using std::string;
 			}
 			x->color = BLACK;
 		}
+		void	destroy(node_pointer x)
+		{
+			if(x != NIL && x != nullptr)
+			{
+				destroy(x->left);
+				destroy(x->right);
+				this->_alloc.destroy(x);
+				this->_alloc.deallocate(x, 1);
+			}
+		}
 	};
 
 	int main()
@@ -462,3 +472,15 @@ using std::string;
 		return 0;
 	}
 // }
+
+
+//1_ Every node is red or black
+//2_ Root is always black
+//3_ New insertions are always red
+//4_ Every path from root-leaf has the same number of black nodes
+//5_ No path can have two consecutive red nodes
+//6_ Nulls are black
+
+//rebalance based on :
+		// black annt rotate			__root black children red
+		// red annt color-flip			__ parent become red children be black

@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/11/28 18:20:58 by asalek           ###   ########.fr       */
+/*   Updated: 2022/12/12 03:44:39 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,29 +201,25 @@ namespace ft
 	}
 
 	//tree iterator
-	template<class Iter, class T>
+	template<class Iter>
 	class tree_iterator : public std::iterator<std::bidirectional_iterator_tag,
-					typename ft::iterator_traits<T>::value_type>
+					typename ft::iterator_traits<Iter>::value_type>
 	{
 		Iter	_current;	//pointer that iterat on key not the value
 		public:
 			tree_iterator():_current(nullptr) {}
-			tree_iterator(Iter x) : _current(x) {}
-			template<class z, class y>
-			tree_iterator(tree_iterator<z, y> &other) : _current(other._current) {}
-			template<class z, class y>
-			tree_iterator &operator=(tree_iterator<z, y> &other)
+			tree_iterator(Iter x) : _current(x){}
+			tree_iterator(const tree_iterator &other) : _current(other._current) {}
+			tree_iterator &operator=(const tree_iterator &other)
 			{
 				this->_current = other.base();
 				return *this;
 			}
-			template<class Iter1, class T1>
-			bool	operator==(tree_iterator<Iter1, T1> &other) { return (_current == other.base()); }
-			template<class Iter1, class T1>
-			bool	operator!=(tree_iterator<Iter1, T1> &other) { return !(_current == other.base()); }
+			bool	operator==(tree_iterator &other) { return (_current == other.base()); }
+			bool	operator!=(tree_iterator &other) { return !(_current == other.base()); }
 			Iter	base() const { return this->_current; }
-			T&		operator*() const { return this->_current->data; }
-			T*		operator->() const { return &(_current->data); }
+			Iter&		operator*() const { return this->_current->data; }
+			Iter*		operator->() const { return &(_current->data); }
 			tree_iterator operator++(int)
 			{
 				tree_iterator tmp(*this);

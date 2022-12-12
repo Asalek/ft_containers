@@ -6,13 +6,14 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/12/12 23:03:51 by asalek           ###   ########.fr       */
+/*   Updated: 2022/12/13 00:53:56 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include "pair.hpp"
 
 namespace ft
 {
@@ -201,7 +202,7 @@ namespace ft
 	}
 	
 	//tree iterator
-	template<class Iter>
+	template<class Iter, class P_T>
 	class tree_iterator : public std::iterator<std::bidirectional_iterator_tag,
 					typename ft::iterator_traits<Iter>::value_type>
 	{
@@ -218,8 +219,8 @@ namespace ft
 			bool	operator==(const tree_iterator &other) { return (_current == other.base()); }
 			bool	operator!=(const tree_iterator &other) { return !(_current == other.base()); }
 			Iter	base() const { return this->_current; }
-			Iter&		operator*() const { return this->_current->data; }
-			Iter*		operator->() const { return &(_current->data); }
+			P_T&	operator*() const { return _current->data; }
+			P_T*	operator->() const { return &(_current->data); }
 			tree_iterator operator++(int)
 			{
 				tree_iterator tmp(*this);

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "pair.hpp"
+#include <functional>
 #include "redBlackTree.hpp"
 #include "iterators.hpp"
-#include <functional>
+#include "pair.hpp"
 
 //   << less<int>{}(5, 5.6)    // false: 5 < 5 (warn: implicit conversion)
 //   << less<double>{}(5, 5.6) // true: 5.0 < 5.6
@@ -20,10 +20,10 @@ namespace ft
 	class map
 	{
 		public:
-			typedef Key	key_type;
-			typedef T	mapped_type;
+			typedef Key									key_type;
+			typedef T									mapped_type;
 			typedef pair<const key_type, mapped_type>	value_type;
-			typedef Compare																key_compare;
+			typedef Compare								key_compare;
 			class	value_compare
 			{
 				friend class map;
@@ -71,10 +71,36 @@ namespace ft
 			// map (const map& x)
 			// {}
 			~map(){}
+
 			iterator begin() { return iterator(_tree.begin_node()); }
 			iterator end() { return iterator(_tree.end_node()); }
 			bool	empty() const { return (_tree.is_empty()); }
 			size_type size() const {return (_tree.red_black_size()); }
 			size_type	max_size() const {return (_tree.max_size()); }
+			iterator	find(const key_type &x)
+			{
+				node_pointer _x = this->_tree.find(ft::make_pair(x, mapped_type()));
+				if (_x == _tree.nil())
+					return this->end();
+				return iterator(_x);
+			}
+			citerator	find(const key_type &x) const
+			{
+				node_pointer _x = this->_tree.find(ft::make_pair(x, mapped_type()));
+				if (_x == _tree.nil())
+					return this->end();
+				return citerator(_x);
+			}
+			pair<iterator, bool> insert (const value_type& val)
+			{
+				iterator _find = this->find(val.first);
+				if (_find == this->end())
+				{
+					this->_tree.insert(val);
+					_find = this->find(val.first);
+					return pair<iterator, bool>(_find, true);
+				}
+				return pair<iterator, bool>(_find, false);
+			}
 	};
 }

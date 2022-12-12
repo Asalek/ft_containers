@@ -1,6 +1,8 @@
 #pragma once
 
 #include "pair.hpp"
+#include "redBlackTree.hpp"
+#include "iterators.hpp"
 #include <functional>
 
 //   << less<int>{}(5, 5.6)    // false: 5 < 5 (warn: implicit conversion)
@@ -21,7 +23,7 @@ namespace ft
 			typedef Key	key_type;
 			typedef T	mapped_type;
 			typedef pair<const key_type, mapped_type>	value_type;
-			typedef Compare	key_compare;
+			typedef Compare																key_compare;
 			class value_compare
 			{
 				friend class map;
@@ -36,23 +38,33 @@ namespace ft
 					{
 						return comp(x.first, y.first);
 					}
-			}
-			typedef Alloc	allocator_type;
-			typedef allocator_type::reference reference;
-			typedef allocator_type::const_reference const_reference;
-			typedef allocator_type::pointer pointer;
-			typedef allocator_type::const_pointer const_pointer;
+			};
+			typedef Alloc																allocator_type;
+			typedef typename allocator_type::reference									reference;
+			typedef typename allocator_type::const_reference							const_reference;
+			typedef typename allocator_type::pointer									pointer;
+			typedef typename allocator_type::const_pointer								const_pointer;
+			typedef typename ft::RedBlackTree<value_type, value_compare, allocator_type> tree;
+			typedef typename ft::node<value_type>										node;
+			typedef node*																node_pointer;
+			typedef ft::tree_iterator<node_pointer>										iterator;
 
+			//constructors
+
+			explicit map (const key_compare& comp = key_compare(), 
+				const allocator_type& alloc = allocator_type())
+			{
+				//explicit : dont cast the parametre.
+			}
+			template <class InputIterator>
+			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
+						const allocator_type& alloc = allocator_type())
+			{}
+			map (const map& x)
+			{}
+			// iterator begin()
+			// {
+			// 	return ();
+			// }
 	};
 }
-
-//1_ Every node is red or black
-//2_ Root is always black
-//3_ New insertions are always red
-//4_ Every path from root-leaf has the same number of black nodes
-//5_ No path can have two consecutive red nodes
-//6_ Nulls are black
-
-//rebalance based on :
-		// black annt rotate			__root black children red
-		// red annt color-flip			__ parent become red children be black

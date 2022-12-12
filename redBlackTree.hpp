@@ -31,7 +31,7 @@ namespace ft
 			typedef struct node<value_type> node;
 			typedef node*	node_pointer;
 			typedef typename Alloc::template rebind<node>::other	allocator_type;	//switch allocater type from T to node
-			typedef	ft::tree_iterator<node_pointer>	iterator;
+			typedef	ft::tree_iterator<node_pointer, value_type>	iterator;
 			// Without the template keyword the < would be considered to be the less-than operator
 		private:
 			allocator_type _alloc;
@@ -116,7 +116,7 @@ namespace ft
 
 			node_pointer node = makenode(data);
 			node->parent = nullptr;
-			node->data = data;
+			// node->data = data;
 			node->left = NIL;
 			node->right = NIL;
 			node->color = RED; // new node must be red

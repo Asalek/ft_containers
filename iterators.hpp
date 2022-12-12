@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/12/12 16:52:07 by asalek           ###   ########.fr       */
+/*   Updated: 2022/12/12 23:03:51 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ namespace ft
 	{
 		return (lhs.base() - rhs.base());
 	}
-
+	
 	//tree iterator
 	template<class Iter>
 	class tree_iterator : public std::iterator<std::bidirectional_iterator_tag,
@@ -215,8 +215,8 @@ namespace ft
 				this->_current = other.base();
 				return *this;
 			}
-			bool	operator==(tree_iterator &other) { return (_current == other.base()); }
-			bool	operator!=(tree_iterator &other) { return !(_current == other.base()); }
+			bool	operator==(const tree_iterator &other) { return (_current == other.base()); }
+			bool	operator!=(const tree_iterator &other) { return !(_current == other.base()); }
 			Iter	base() const { return this->_current; }
 			Iter&		operator*() const { return this->_current->data; }
 			Iter*		operator->() const { return &(_current->data); }

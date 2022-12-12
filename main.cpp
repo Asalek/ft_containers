@@ -1,5 +1,6 @@
 #include "vector.hpp"
 #include "stack.hpp"
+#include "map.hpp"
 #include <vector>
 
 using namespace ft;
@@ -204,5 +205,21 @@ int main()
 		//pop test
 		second.pop();
 		cout << "TOP after POP of second Stack : " << second.top() << endl;
+	}
+
+	//				****************************
+	//						  M闩P
+	//				****************************
+	cout <<"\n"<<"▁▂▄▅▆▇█ ϻ𝐀ק █▇▆▅▄▂▁"<< endl << endl;
+	{
+		ft::map<char, int> map;
+		ft::map<char, int>::iterator it;
+
+		it = map.begin();
+		it = map.end();
+
+		cout << "map size() :  " << map.size() << endl;
+		cout << "map empty() : " << (map.empty()?"true":"false") << endl;
+		cout << "max_size() :  " << map.max_size() << endl;
 	}
 }

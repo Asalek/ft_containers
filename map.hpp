@@ -24,7 +24,7 @@ namespace ft
 			typedef T	mapped_type;
 			typedef pair<const key_type, mapped_type>	value_type;
 			typedef Compare																key_compare;
-			class value_compare
+			class	value_compare
 			{
 				friend class map;
 				protected:
@@ -48,23 +48,33 @@ namespace ft
 			typedef typename ft::node<value_type>										node;
 			typedef node*																node_pointer;
 			typedef ft::tree_iterator<node_pointer>										iterator;
-
+			typedef ft::tree_iterator<const node_pointer>								citerator;
+			typedef std::ptrdiff_t														difference_type;
+			typedef size_t																size_type;
+		private:
+			tree			_tree;
+			allocator_type	_alloc;
+			key_compare		_comp;
+		public:
 			//constructors
 
 			explicit map (const key_compare& comp = key_compare(), 
 				const allocator_type& alloc = allocator_type())
-			{
-				//explicit : dont cast the parametre.
+				: _tree(value_compare(comp), alloc), _alloc(alloc), _comp(comp)
+			{ //explicit : dont cast the parametre.
 			}
-			template <class InputIterator>
-			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
-						const allocator_type& alloc = allocator_type())
-			{}
-			map (const map& x)
-			{}
-			// iterator begin()
-			// {
-			// 	return ();
-			// }
+
+			// template <class InputIterator>
+			// map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
+			// 			const allocator_type& alloc = allocator_type())
+			// {}
+			// map (const map& x)
+			// {}
+			~map(){}
+			iterator begin() { return iterator(_tree.begin_node()); }
+			iterator end() { return iterator(_tree.end_node()); }
+			bool	empty() const { return (_tree.is_empty()); }
+			size_type size() const {return (_tree.red_black_size()); }
+			size_type	max_size() const {return (_tree.max_size()); }
 	};
 }

@@ -48,7 +48,7 @@ namespace ft
 				return nodeCreated;
 			}
 		public:
-		RedBlackTree(): root(nullptr), end(nullptr), size(0), _comp()
+		RedBlackTree(): root(nullptr), end(nullptr), _comp(), size(0)
 		{
 			end = this->makenode();
 			NIL = this->makenode();
@@ -58,12 +58,12 @@ namespace ft
 			NIL->color = BLACK;
 			root = NIL;
 		}
-		RedBlackTree(value_compare _comp, allocator_type _alloc): root(nullptr), end(), _alloc(_alloc), _comp(_comp), size(0)
+		RedBlackTree(value_compare _comp, allocator_type _alloc): _alloc(_alloc), root(nullptr), end(),  _comp(_comp), size(0)
 		{
 			end = this->makenode();
 		}
 
-		RedBlackTree(const RedBlackTree& _tr) : root(nullptr), end(), _alloc(_tr._alloc), _comp(), size(0)
+		RedBlackTree(const RedBlackTree& _tr) : _alloc(_tr._alloc),root(nullptr),  end(), _comp(), size(0)
 		{
 			*this = _tr;
 		}
@@ -459,13 +459,17 @@ namespace ft
 			this->root = nullptr;
 			this->size= 0;
 		}
-		size_t	red_black_size() {return this->size;}
-		bool	is_empty() {return (size == 0);}
+		size_t	red_black_size() const { return this->size;}
+		bool	is_empty() const { return (size == 0);}
+		size_t	max_size() const { return _alloc.max_size(); }
 		iterator	end_node()
 		{
 			// node_pointer end = makenode();
-			end->left = maximum(this->root);
-			end->right = minimum(this->root);
+			if (root != NIL)
+			{
+				end->left = maximum(this->root);
+				end->right = minimum(this->root);
+			}
 			return iterator(end);
 		}
 		iterator	begin_node()

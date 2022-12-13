@@ -177,7 +177,7 @@ int main()
 	for (size_t i = 0; i < vec.size(); i++)
 		cout << vec[i] << " ";
 	try{vec.erase(vec.begin() , vec.end()); cout<< "\nerase() done successfully\n";}catch(std::exception &e) { cout << e.what(); }
-
+	
 	//				****************************
 	//						  丂丁闩꒟ズ
 	//				****************************
@@ -214,12 +214,30 @@ int main()
 	{
 		ft::map<char, int> map;
 		ft::map<char, int>::iterator it;
+		ft::map<char, int>::iterator it2;
+		ft::pair<ft::map<char,int>::iterator,bool> ret;//find
 
+
+		// it->first;
+		cout << "size()     : " << map.size() << endl;
+		cout << "empty()    : " << (map.empty()?"true":"false") << endl;
+		cout << "max_size() : " << map.max_size() << endl;
+		ret = map.insert(ft::pair<char, int>('a', 12));
+		ret = map.insert(ft::pair<char, int>('b', 13));
+		ret = map.insert(ft::pair<char, int>('c', 14));
+		ret = map.insert(ft::pair<char, int>('d', 15));
+		ret = map.insert(ft::pair<char, int>('e', 16));
+		
 		it = map.begin();
-		it = map.end();
-
-		cout << "map size() :  " << map.size() << endl;
-		cout << "map empty() : " << (map.empty()?"true":"false") << endl;
-		cout << "max_size() :  " << map.max_size() << endl;
+		it2 = map.end();
+		for (; it != it2; it++)
+		// it2--;
+		// it2--;
+		// it2--;
+		// it2--;
+		// it2--;
+			cout << "find value First : '"<< (*it).first << "' Second : " << (*it).second<< endl;
+		cout << "size()     : " << map.size() << endl;
+		// cout << "find()     : " << (*it)->first << endl;
 	}
 }

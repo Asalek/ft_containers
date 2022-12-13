@@ -85,7 +85,7 @@ namespace ft
 					sColor = "RED";
 				else
 					sColor = "BLACK";
-				cout << nodee->data << "(" << sColor << ")" << endl;
+				cout << nodee->data.first << "(" << sColor << ")" << endl;
 				printHelper(nodee->left, indent, false);
 				printHelper(nodee->right, indent, true);
         	}
@@ -138,7 +138,7 @@ namespace ft
 				y->left = node;
 			else
 				y->right = node;
-
+			size++;
 			// if new node is a root node, simply return
 			if (node->parent == nullptr)
 			{

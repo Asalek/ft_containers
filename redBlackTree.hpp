@@ -21,6 +21,9 @@ namespace ft
 		bool color;
 		node():data(), parent(nullptr), left(nullptr), right(nullptr), color(0){}
 		node(T _data):data(_data), parent(nullptr), left(nullptr), right(nullptr), color(0){}
+		bool isleft() {return (parent && parent->left == this); }
+		bool isright() {return (parent && parent->right == this); }
+		bool isroot() {return (!parent); }
 	};
 	template <class T, class Compare = std::less<T>, class Alloc = std::allocator<T> >
 	class RedBlackTree
@@ -470,6 +473,8 @@ namespace ft
 				end->left = maximum(this->root);
 				end->right = minimum(this->root);
 			}
+			end->left = nullptr;
+			end->right = nullptr;
 			return iterator(end);
 		}
 		iterator	begin_node()

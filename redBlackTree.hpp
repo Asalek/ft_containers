@@ -473,8 +473,8 @@ namespace ft
 				end->left = maximum(this->root);
 				end->right = minimum(this->root);
 			}
-			end->left = nullptr;
-			end->right = nullptr;
+			// end->left = nullptr;
+			// end->right = nullptr;
 			return iterator(end);
 		}
 		iterator	begin_node()

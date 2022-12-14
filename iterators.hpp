@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/12/13 00:53:56 by asalek           ###   ########.fr       */
+/*   Updated: 2022/12/14 05:24:48 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,19 +246,19 @@ namespace ft
 		private:
 			Iter	minimum(Iter node) const		//return the left node in the tree
 			{
-				while (node->left->left != nullptr)
+				while (node->left)//(node->left->left != nullptr)
 					node = node->left;
 				return (node);
 			}
 			Iter	maximum(Iter node) const		//return the right node in the tree
 			{
-				while (node->right->right != nullptr)
+				while (node->right)//(node->right->right != nullptr)
 					node = node->right;
 				return (node);
 			}
 			Iter	successor(Iter node)
 			{
-				if (node->right->right != nullptr)
+				if (node->right)//(node->right->right != nullptr)
 					return (minimum(node->right));
 				Iter x = node->parent;
 				while (x != nullptr && node == x->right)
@@ -270,7 +270,7 @@ namespace ft
 			}
 			Iter	predecessor(Iter node)
 			{
-				if (node->left->left != nullptr)
+				if (node->left != nullptr)//(node->left->left != nullptr)
 					return (maximum(node->left));
 				Iter x = node->parent;
 				while (x != nullptr && node == x->left)

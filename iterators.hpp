@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/12/14 05:24:48 by asalek           ###   ########.fr       */
+/*   Updated: 2022/12/15 22:50:48 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,9 +207,11 @@ namespace ft
 					typename ft::iterator_traits<Iter>::value_type>
 	{
 		Iter	_current;	//pointer that iterat on key not the value
+		Iter	_nil;
 		public:
 			tree_iterator():_current(nullptr) {}
 			tree_iterator(Iter x) : _current(x){}
+			tree_iterator(Iter c, Iter n) : _current(c), _nil(n){}
 			tree_iterator(const tree_iterator &other) : _current(other._current) {}
 			tree_iterator &operator=(const tree_iterator &other)
 			{
@@ -217,7 +219,15 @@ namespace ft
 				return *this;
 			}
 			bool	operator==(const tree_iterator &other) { return (_current == other.base()); }
-			bool	operator!=(const tree_iterator &other) { return !(_current == other.base()); }
+			// bool	operator!=(const tree_iterator &other) { return !(_current == other.base()); }
+			bool	operator!=(const tree_iterator &other)
+			{
+				if (_current == other.base())
+					return false;
+				if (_current == _nil)
+					return false;
+				return true;
+			}
 			Iter	base() const { return this->_current; }
 			P_T&	operator*() const { return _current->data; }
 			P_T*	operator->() const { return &(_current->data); }

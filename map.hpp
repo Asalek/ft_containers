@@ -73,7 +73,7 @@ namespace ft
 			~map(){}
 
 			iterator begin() { return iterator(_tree.begin_node()); }
-			iterator end() { return iterator(_tree.end_node()); }
+			iterator end() { return iterator(_tree.end_node(), _tree.nil()); }
 			bool	empty() const { return (_tree.is_empty()); }
 			size_type size() const {return (_tree.red_black_size()); }
 			size_type	max_size() const {return (_tree.max_size()); }

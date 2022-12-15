@@ -59,6 +59,7 @@ namespace ft
 			NIL->right = nullptr;
 			NIL->parent = nullptr;
 			NIL->color = BLACK;
+			end = NIL;
 			root = NIL;
 		}
 		RedBlackTree(value_compare _comp, allocator_type _alloc): _alloc(_alloc), root(nullptr), end(),  _comp(_comp), size(0)
@@ -465,23 +466,21 @@ namespace ft
 		size_t	red_black_size() const { return this->size;}
 		bool	is_empty() const { return (size == 0);}
 		size_t	max_size() const { return _alloc.max_size(); }
-		iterator	end_node()
+		node_pointer	end_node()
 		{
-			// node_pointer end = makenode();
 			if (root != NIL)
 			{
-				end->left = maximum(this->root);
-				end->right = minimum(this->root);
+				end->parent = maximum(this->root);
 			}
-			// end->left = nullptr;
-			// end->right = nullptr;
-			return iterator(end);
+			end->left = nullptr;
+			end->right = nullptr;
+			return (end);
 		}
-		iterator	begin_node()
+		node_pointer	begin_node()
 		{
 			if (root != NIL && root != nullptr)
-				return iterator(minimum(this->root));
-			return end;
+				return (minimum(this->root));
+			return NIL;
 		}
 		node_pointer	nil() { return (this->NIL); }
 	};

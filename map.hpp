@@ -64,10 +64,12 @@ namespace ft
 			{ //explicit : dont cast the parametre.
 			}
 
-			// template <class InputIterator>
-			// map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
-			// 			const allocator_type& alloc = allocator_type())
-			// {}
+			template <class InputIterator>
+			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
+						const allocator_type& alloc = allocator_type()): _tree(value_compare(comp), alloc),  _alloc(alloc), _comp(comp)
+			{
+				this->insert(first, last);
+			}
 			// map (const map& x)
 			// {}
 			~map(){}
@@ -114,8 +116,12 @@ namespace ft
 			template <class inputIterator>
 			void	insert(inputIterator first, inputIterator last)
 			{
-				for (; first != last; ++first)
+				--last;
+				while (first != last)
+				{
 					this->insert(*first);
+					first++;
+				}
 			}
 	};
 }

@@ -51,6 +51,9 @@ namespace ft
 			typedef ft::tree_iterator<node_pointer, const value_type>								citerator;
 			typedef std::ptrdiff_t														difference_type;
 			typedef size_t																size_type;
+			typedef typename ft::reverse_iterator<iterator>								reverse_iterator;
+			typedef typename ft::reverse_iterator<citerator>							const_reverse_iterator;
+
 		private:
 			tree			_tree;
 			allocator_type	_alloc;
@@ -90,13 +93,29 @@ namespace ft
 				return *this;
 			}
 			void	clear() { this->_tree.clear(); }
+			
 			iterator begin() { return iterator(_tree.begin_node()); }
+			
 			citerator begin() const { return citerator(_tree.begin_node()); }
+			
 			iterator end() { return iterator(_tree.end_node(), _tree.nil()); }
+			
 			citerator end() const { return citerator(_tree.end_node(), _tree.nil()); }
+			
+			reverse_iterator rbegin() { return reverse_iterator(this->end()); }
+			
+			const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->end())); }
+
+			reverse_iterator rend() { return (reverse_iterator(this->begin())); }
+			
+			const_reverse_iterator rend() const { return (const_reverse_iterator(this->begin())); }
+			
 			bool	empty() const { return (_tree.is_empty()); }
+			
 			size_type size() const {return (_tree.red_black_size()); }
+			
 			size_type	max_size() const {return (_tree.max_size()); }
+			
 			iterator	find(const key_type &x)
 			{
 				node_pointer _x = this->_tree.find(ft::make_pair(x, mapped_type()));

@@ -213,31 +213,36 @@ int main()
 	cout <<"\n"<<"▁▂▄▅▆▇█ ϻ𝐀ק █▇▆▅▄▂▁"<< endl << endl;
 	{
 		ft::map<char, int> map;
-		ft::map<char, int>::iterator it;
-		ft::map<char, int>::iterator it2;
-		ft::pair<ft::map<char,int>::iterator,bool> ret;//find
+		ft::map<char, int> map2;
+		ft::map<char, int>::iterator it;	//main map
+		ft::map<char, int>::iterator it2;	//map to copy too it
+		ft::pair<ft::map<char,int>::iterator,bool> ret;//find iterator
 
 
-		// it->first;
 		cout << "size()     : " << map.size() << endl;
 		cout << "empty()    : " << (map.empty()?"true":"false") << endl;
 		cout << "max_size() : " << map.max_size() << endl;
-		ret = map.insert(ft::pair<char, int>('a', 12));
+		ret = map.insert(ft::pair<char, int>('a', 12));//insert by pair
 		ret = map.insert(ft::pair<char, int>('b', 13));
 		ret = map.insert(ft::pair<char, int>('c', 14));
 		ret = map.insert(ft::pair<char, int>('d', 15));
 		ret = map.insert(ft::pair<char, int>('e', 16));
-		it = map.begin();
-		it2 = map.end();
 
-		while (it != it2)
+		it = map.begin();	//iterator to map beginig
+		it2 = map.end();	//iterator to map end + 1 (nil node)
+
+		map2.insert(it, it2);	//insert by iterator range
+
+		it = map2.begin();
+		it2 = map2.end();
+		while (it != it2)	//check the copy has the same value as main map
 		{
 			it2--;
-			cout << "find value First : '"<< (*it2).first << "' Second : " << (*it2).second<< endl;
+			cout << "value First : '"<< (*it2).first << "' Second : " << (*it2).second<< endl;
 		}
-		while (it != it2)
+		while (it != it2)	//printf nothing cause of it reach the end
 		{
-			cout << "find value First : '"<< (*it).first << "' Second : " << (*it).second<< endl;
+			cout << "value First : '"<< (*it).first << "' Second : " << (*it).second<< endl;
 			it++;
 		}
 		cout << "size()     : " << map.size() << endl;

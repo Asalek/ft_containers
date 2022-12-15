@@ -227,17 +227,19 @@ int main()
 		ret = map.insert(ft::pair<char, int>('c', 14));
 		ret = map.insert(ft::pair<char, int>('d', 15));
 		ret = map.insert(ft::pair<char, int>('e', 16));
-		
 		it = map.begin();
 		it2 = map.end();
-		for (; it != it2; it++)
-		// it2--;
-		// it2--;
-		// it2--;
-		// it2--;
-		// it2--;
+
+		while (it != it2)
+		{
+			it2--;
+			cout << "find value First : '"<< (*it2).first << "' Second : " << (*it2).second<< endl;
+		}
+		while (it != it2)
+		{
 			cout << "find value First : '"<< (*it).first << "' Second : " << (*it).second<< endl;
+			it++;
+		}
 		cout << "size()     : " << map.size() << endl;
-		// cout << "find()     : " << (*it)->first << endl;
 	}
 }

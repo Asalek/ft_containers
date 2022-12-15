@@ -35,6 +35,7 @@ namespace ft
 			typedef node*	node_pointer;
 			typedef typename Alloc::template rebind<node>::other	allocator_type;	//switch allocater type from T to node
 			typedef	ft::tree_iterator<node_pointer, value_type>	iterator;
+			typedef	ft::tree_iterator<node_pointer, const value_type>	citerator;
 			// Without the template keyword the < would be considered to be the less-than operator
 		private:
 			allocator_type _alloc;
@@ -67,7 +68,7 @@ namespace ft
 			end = this->makenode();
 		}
 
-		RedBlackTree(const RedBlackTree& _tr) : _alloc(_tr._alloc),root(nullptr),  end(), _comp(), size(0)
+		RedBlackTree(const RedBlackTree& _tr) : _alloc(_tr._alloc),root(nullptr),  end(), _comp(_tr._comp), size(0)
 		{
 			*this = _tr;
 		}
@@ -476,7 +477,23 @@ namespace ft
 			end->right = nullptr;
 			return (end);
 		}
+		node_pointer	end_node() const
+		{
+			if (root != NIL)
+			{
+				end->parent = maximum(this->root);
+			}
+			end->left = nullptr;
+			end->right = nullptr;
+			return (end);
+		}
 		node_pointer	begin_node()
+		{
+			if (root != NIL && root != nullptr)
+				return (minimum(this->root));
+			return NIL;
+		}
+		node_pointer	begin_node() const
 		{
 			if (root != NIL && root != nullptr)
 				return (minimum(this->root));

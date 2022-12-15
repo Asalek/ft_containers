@@ -48,7 +48,7 @@ namespace ft
 			typedef typename ft::node<value_type>										node;
 			typedef node*																node_pointer;
 			typedef ft::tree_iterator<node_pointer, value_type>										iterator;
-			typedef ft::tree_iterator<const node_pointer, const value_type>								citerator;
+			typedef ft::tree_iterator<node_pointer, const value_type>								citerator;
 			typedef std::ptrdiff_t														difference_type;
 			typedef size_t																size_type;
 		private:
@@ -70,12 +70,30 @@ namespace ft
 			{
 				this->insert(first, last);
 			}
-			// map (const map& x)
-			// {}
+			map (const map& x):_tree(value_compare(x._comp), x._alloc),  _alloc(x._alloc), _comp(x._comp)
+			{
+				*this = x;
+			}
 			~map(){}
 
+			map	&operator=(const map& m)
+			{
+				if (this != &m)
+				{
+					this->clear();
+					this->_alloc = m._alloc;
+					this->_comp = m._comp;
+					citerator b = m._tree.begin_node();
+					citerator e = m._tree.begin_node();
+					insert(b, e);
+				}
+				return *this;
+			}
+			void	clear() { this->_tree.clear(); }
 			iterator begin() { return iterator(_tree.begin_node()); }
+			citerator begin() const { return citerator(_tree.begin_node()); }
 			iterator end() { return iterator(_tree.end_node(), _tree.nil()); }
+			citerator end() const { return citerator(_tree.end_node(), _tree.nil()); }
 			bool	empty() const { return (_tree.is_empty()); }
 			size_type size() const {return (_tree.red_black_size()); }
 			size_type	max_size() const {return (_tree.max_size()); }

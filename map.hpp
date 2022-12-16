@@ -223,5 +223,30 @@ namespace ft
 			{
 				return this->_alloc;
 			}
+			iterator upper_bound (const key_type& k)
+			{
+				return _tree.upper_bound(make_pair(k, mapped_type()));
+			}
+
+			citerator upper_bound (const key_type& k) const
+			{
+				return _tree.upper_bound(make_pair(k, mapped_type()));
+			}
+			iterator	lower_bound (const key_type &k)
+			{
+				return _tree.lower_bound(make_pair(k, mapped_type()));
+			}
+			citerator	lower_bound (const key_type &k) const
+			{
+				return _tree.lower_bound(make_pair(k, mapped_type()));
+			}
+			pair<citerator,citerator> equal_range (const key_type& k) const
+			{
+				return pair<citerator,citerator>(lower_bound(k), upper_bound(k));
+			}
+			pair<iterator,iterator> equal_range (const key_type& k)
+			{
+				return pair<iterator,iterator>(lower_bound(k), upper_bound(k));
+			}
 	};
 }

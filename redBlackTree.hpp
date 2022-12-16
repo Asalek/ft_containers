@@ -539,6 +539,73 @@ namespace ft
 			std::swap(this->_comp, tree._comp);
 			std::swap(this->size, tree.size);
 		}
+		iterator	upper_bound (const value_type &value)
+		{
+			node_pointer	res = NIL;
+			node_pointer	pRoot = root;
+			while (pRoot != NIL)
+			{
+				if (_comp(value, pRoot->data))
+				{
+					res = pRoot;
+					pRoot = pRoot->left;
+				}
+				else
+					pRoot = pRoot->right;
+			}
+			return iterator(res);
+		}
+
+		citerator	upper_bound (const value_type &value) const
+		{
+			node_pointer	res = NIL;
+			node_pointer	pRoot = root;
+			while (pRoot != NIL)
+			{
+				if (_comp(value, pRoot->data))
+				{
+					res = pRoot;
+					pRoot = pRoot->left;
+				}
+				else
+					pRoot = pRoot->right;
+			}
+			return citerator(res);
+		}
+
+		citerator lower_bound (const value_type& value) const
+		{
+			node_pointer res = NIL;
+			node_pointer pRoot = this->_root;
+			while (pRoot != nullptr)
+			{
+				if (!_comp(pRoot->_data, value))
+				{
+					res = pRoot;
+					pRoot = pRoot->_left;
+				}
+				else
+					pRoot = pRoot->_right;
+			}
+			return citerator(res);
+		}
+		
+		iterator lower_bound (const value_type& value)
+		{
+			node_pointer res = NIL;
+			node_pointer pRoot = this->root;
+			while (pRoot != nullptr)
+			{
+				if (!_comp(pRoot->data, value))
+				{
+					res = pRoot;
+					pRoot = pRoot->left;
+				}
+				else
+					pRoot = pRoot->right;
+			}
+			return iterator(res);
+		}
 	};
 }
 

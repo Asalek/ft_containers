@@ -275,5 +275,17 @@ int main()
 			cout << "value First : '"<< (*it).first << "' Second : " << (*it).second<< endl;
 			it++;
 		}
+		//test count :
+		int i = map4.count('c');
+		cout << "\ncount test :		"<< endl;
+		char c;
+		for (c='c'; c<='g'; c++)
+		{
+			std::cout << c;
+			if (map4.count(c)>0)
+				std::cout << " is an element of mymap.\n";
+			else 
+				std::cout << " is not an element of mymap.\n";
+		}
 	}	
 }

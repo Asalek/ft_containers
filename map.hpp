@@ -213,5 +213,15 @@ namespace ft
 			{
 				return this->_comp;
 			}
+			size_type count (const key_type& k) const
+			{
+				if (this->find(k) != this->end())
+					return 1;
+				return 0;
+			}
+			allocator_type get_allocator() const
+			{
+				return this->_alloc;
+			}
 	};
 }

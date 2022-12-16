@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/12/15 22:50:48 by asalek           ###   ########.fr       */
+/*   Updated: 2022/12/16 22:28:24 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ namespace ft
 			{
 				if (_current == other.base())
 					return false;
-				if (_current == _nil)
+				if (_current == _nil || _current == nullptr)
 					return false;
 				return true;
 			}

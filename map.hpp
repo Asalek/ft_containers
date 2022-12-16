@@ -105,7 +105,8 @@ namespace ft
 			mapped_type	&operator[](const key_type &k)
 			{
 				iterator found = this->find(k);
-				if (found != _tree.nil())
+				// if (found != _tree.nil())
+				if (found != this->end())
 					return ((*found).second);
 				return (*((this->insert(ft::make_pair(k,mapped_type()))).first)).second;
 			}
@@ -246,7 +247,9 @@ namespace ft
 			}
 			pair<iterator,iterator> equal_range (const key_type& k)
 			{
-				return pair<iterator,iterator>(lower_bound(k), upper_bound(k));
+				iterator low = lower_bound(k);
+				iterator up = upper_bound(k);
+				return (ft::make_pair(this->lower_bound(k), this->upper_bound(k)));
 			}
 	};
 }

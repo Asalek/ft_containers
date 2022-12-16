@@ -232,15 +232,16 @@ int main()
 
 		it = map.begin();	//iterator to map beginig
 		it2 = map.end();	//iterator to map end + 1 (nil node)
-
 		ft::map<char, int> map3(it, it2); // check map(iterator, iterator) constructor
 		ft::map<char, int> map4(map); // check copy constructor
 
 		map2.insert(it, it2);	//insert by iterator range
 
+		map4['a'] = 99;		//test overload operator[]
+		map4.erase('b');
 		it = map4.begin();
 		it2 = map4.end();
-		map4['a'] = 99;		//test overload operator[]
+		
 		while (it != it2)	//check the copy has the same value as main map
 		{
 			it2--;
@@ -252,5 +253,5 @@ int main()
 			it++;
 		}
 		cout << "size()     : " << map.size() << endl;
-	}
+	}	
 }

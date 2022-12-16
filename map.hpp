@@ -205,5 +205,13 @@ namespace ft
 				std::swap(this->_alloc, x._alloc);
 				std::swap(this->_comp, x._comp);
 			}
+			value_compare value_comp() const
+			{
+				return value_compare(this->_comp);
+			}
+			key_compare	key_comp() const
+			{
+				return this->_comp;
+			}
 	};
 }

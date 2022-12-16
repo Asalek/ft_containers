@@ -63,28 +63,40 @@ namespace ft
 			end = NIL;
 			root = NIL;
 		}
-		RedBlackTree(value_compare _comp, allocator_type _alloc): _alloc(_alloc), root(nullptr), end(),  _comp(_comp), size(0)
+		RedBlackTree(value_compare _comp, allocator_type _alloc): _alloc(_alloc), root(nullptr), end(),  _comp(_comp), size(0), NIL(nullptr)
 		{
 			end = this->makenode();
+			// NIL = this->makenode();
+			// NIL->left = nullptr;
+			// NIL->right = nullptr;
+			// NIL->parent = nullptr;
+			// NIL->color = BLACK;
+			// end = NIL;
+			// root = NIL;
 		}
 
-		RedBlackTree(const RedBlackTree& _tr) : _alloc(_tr._alloc),root(nullptr),  end(), _comp(_tr._comp), size(0)
+		RedBlackTree(const RedBlackTree& _tr) : _alloc(_tr._alloc),root(nullptr),  end(), _comp(_tr._comp), size(0), NIL(nullptr)
 		{
+			// NIL = makenode();
 			*this = _tr;
 		}
-		RedBlackTree& operator=(RedBlackTree& tree)
+		RedBlackTree& operator=(const RedBlackTree& node)
 		{
-			if (this != &tree)
+			if (this != &node)
 			{
 				this->clear();
-				value_compare() = tree.value_comp();
-				this->_alloc = tree._alloc;
-				this->NIL = tree.NIL;
+				// value_compare() = node.value_comp();
+				this->_alloc = node._alloc;
+				this->NIL = node.NIL;
 				this->NIL->color = BLACK;
-				iterator _tb = tree.begin();
-				while (_tb != tree.NIL)
-					insert(*_tb++);
+				iterator _tb = node.begin_node();
+				while (_tb != node.NIL)
+				{
+					insert(*_tb);
+					_tb++;
+				}
 			}
+			return *this;
 		}
 
 		void printHelper(node_pointer nodee, string indent, bool last) {
@@ -106,6 +118,7 @@ namespace ft
 				else
 					sColor = "BLACK";
 				cout << nodee->data.first << "(" << sColor << ")" << endl;
+				// cout << nodee->data << "(" << sColor << ")" << endl;
 				printHelper(nodee->left, indent, false);
 				printHelper(nodee->right, indent, true);
         	}
@@ -329,7 +342,7 @@ namespace ft
 			node_pointer x;
 			node_pointer y;
 
-			if (!root || (Del = find(value)) == nullptr)
+			if (!root || (Del = find(value)) == NIL)
 				return ;
 			// this->end->left = nullptr;
 			// this->root->parent = nullptr;
@@ -514,6 +527,7 @@ namespace ft
 				return (minimum(this->root));
 			return NIL;
 		}
+		node_pointer	nil() const { return (this->NIL); }
 		node_pointer	nil() { return (this->NIL); }
 	};
 }

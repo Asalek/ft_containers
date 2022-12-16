@@ -72,7 +72,22 @@ namespace ft
 		{
 			*this = _tr;
 		}
-		  void printHelper(node_pointer nodee, string indent, bool last) {
+		RedBlackTree& operator=(RedBlackTree& tree)
+		{
+			if (this != &tree)
+			{
+				this->clear();
+				value_compare() = tree.value_comp();
+				this->_alloc = tree._alloc;
+				this->NIL = tree.NIL;
+				this->NIL->color = BLACK;
+				iterator _tb = tree.begin();
+				while (_tb != tree.NIL)
+					insert(*_tb++);
+			}
+		}
+
+		void printHelper(node_pointer nodee, string indent, bool last) {
 		    if (nodee != NIL)
 			{
 				cout << indent;

@@ -265,5 +265,15 @@ int main()
 			cout << "value First : '"<< (*it).first << "' Second : " << (*it).second<< endl;
 			it++;
 		}
+		//clear test
+		cout << "test clear : should print nothing\n";
+		map.clear();
+		it = map.begin();
+		it2 = map.end();
+		while (it != it2)
+		{
+			cout << "value First : '"<< (*it).first << "' Second : " << (*it).second<< endl;
+			it++;
+		}
 	}	
 }

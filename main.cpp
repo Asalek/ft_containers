@@ -283,9 +283,21 @@ int main()
 		{
 			std::cout << c;
 			if (map4.count(c)>0)
-				std::cout << " is an element of mymap.\n";
+				std::cout << " is an element of map4.\n";
 			else 
-				std::cout << " is not an element of mymap.\n";
+				std::cout << " is not an element of map4.\n";
 		}
+		//test upper_bound :
+		it = map4.upper_bound('c');
+		cout << "C upper Bound is : " << (*it).first << endl;
+
+		//test equal_range
+		ft::map<char, int> mymap;
+
+		mymap['a']=10;
+		mymap['b']=20;
+		mymap['c']=30;
+
+		cout << mymap['a'] << "<= ['a']" <<endl; 
 	}	
 }

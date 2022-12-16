@@ -529,6 +529,16 @@ namespace ft
 		}
 		node_pointer	nil() const { return (this->NIL); }
 		node_pointer	nil() { return (this->NIL); }
+		
+		void swap(RedBlackTree& tree)
+		{
+			std::swap(this->root, tree.root);
+			std::swap(this->end, tree.end);
+			std::swap(this->NIL, tree.NIL);
+			std::swap(this->_alloc , tree._alloc);
+			std::swap(this->_comp, tree._comp);
+			std::swap(this->size, tree.size);
+		}
 	};
 }
 

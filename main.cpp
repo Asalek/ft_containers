@@ -241,7 +241,7 @@ int main()
 		map4.erase('b');
 		it = map4.begin();
 		it2 = map4.end();
-		
+
 		while (it != it2)	//check the copy has the same value as main map
 		{
 			it2--;
@@ -253,5 +253,17 @@ int main()
 			it++;
 		}
 		cout << "size()     : " << map.size() << endl;
+
+		map4['c'] = 99;
+		map.swap(map4);
+
+		//test swap function, ps: a and c in map 4 both have 99 value
+		it = map.begin();
+		it2 = map.end();
+		while (it != it2)
+		{
+			cout << "value First : '"<< (*it).first << "' Second : " << (*it).second<< endl;
+			it++;
+		}
 	}	
 }

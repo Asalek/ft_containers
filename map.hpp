@@ -199,5 +199,11 @@ namespace ft
 				while (first != last && first != this->_tree.nil())
 						this->erase(first++);
 			}
+			void swap (map &x)
+			{
+				_tree.swap(x._tree);
+				std::swap(this->_alloc, x._alloc);
+				std::swap(this->_comp, x._comp);
+			}
 	};
 }

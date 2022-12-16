@@ -267,7 +267,7 @@ int main()
 		}
 		//clear test
 		cout << "test clear : should print nothing\n";
-		map.clear();
+		map.clear();			// clear map
 		it = map.begin();
 		it2 = map.end();
 		while (it != it2)
@@ -299,5 +299,14 @@ int main()
 		mymap['c']=30;
 
 		cout << mymap['a'] << "<= ['a']" <<endl; 
+
+		ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> eq;
+		eq = mymap.equal_range('b');
+
+		cout << "lower bound points to: ";
+		cout << eq.first->first << " => " << eq.first->second << '\n';
+
+		cout << "upper bound points to: ";
+		cout << eq.second->first << " => " << eq.second->second << '\n';
 	}	
 }

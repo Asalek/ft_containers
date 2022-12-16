@@ -53,13 +53,14 @@ namespace ft
 			typedef size_t																size_type;
 			typedef typename ft::reverse_iterator<iterator>								reverse_iterator;
 			typedef typename ft::reverse_iterator<citerator>							const_reverse_iterator;
+			typedef std::allocator<tree>								allocator_typee;
 
 		private:
 			tree			_tree;
+			allocator_typee		_tree_allocator;
 			allocator_type	_alloc;
 			key_compare		_comp;
 		public:
-			//constructors
 
 			explicit map (const key_compare& comp = key_compare(), 
 				const allocator_type& alloc = allocator_type())
@@ -69,9 +70,14 @@ namespace ft
 
 			template <class InputIterator>
 			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
-						const allocator_type& alloc = allocator_type()): _tree(value_compare(comp), alloc),  _alloc(alloc), _comp(comp)
+						const allocator_type& alloc = allocator_type()): _tree(value_compare(comp), alloc), _alloc(alloc), _comp(comp)
 			{
-				this->insert(first, last);
+				// this->insert(first, last);
+				while (first != last && first != this->_tree.nil())
+				{
+					this->insert(*first);
+					first++;
+				}
 			}
 			map (const map& x):_tree(value_compare(x._comp), x._alloc),  _alloc(x._alloc), _comp(x._comp)
 			{
@@ -86,9 +92,13 @@ namespace ft
 					this->clear();
 					this->_alloc = m._alloc;
 					this->_comp = m._comp;
-					citerator b = m._tree.begin_node();
-					citerator e = m._tree.begin_node();
-					insert(b, e);
+					iterator first = m._tree.begin_node();
+					iterator last = m._tree.end_node();
+					while (first != last && first != this->_tree.nil())
+					{
+						this->insert(*first);
+						first++;
+					}
 				}
 				return *this;
 			}
@@ -140,6 +150,7 @@ namespace ft
 			pair<iterator, bool> insert (const value_type& val)
 			{
 				iterator _find = this->find(val.first);
+				// if (_find == this->_tree.nil())
 				if (_find == this->end())
 				{
 					this->_tree.insert(val);
@@ -161,11 +172,32 @@ namespace ft
 			void	insert(inputIterator first, inputIterator last)
 			{
 				--last;
-				while (first != last)
+				while (first != last)// && first != this->_tree.nil())
 				{
 					this->insert(*first);
 					first++;
 				}
+			}
+			void	erase(iterator position)
+			{
+				// if (this->find((*position).first) != this->_tree.nil())
+				this->_tree.deleteNode(*position);
+				// _tree.printTree();
+			}
+			size_type erase (const key_type& k)
+			{
+				iterator found = this->find(k);
+				if (found != this->_tree.nil())
+				{
+					this->erase(found);
+					return (1);
+				}
+				return (0);
+			}
+			void erase (iterator first, iterator last)
+			{
+				while (first != last && first != this->_tree.nil())
+						this->erase(first++);
 			}
 	};
 }

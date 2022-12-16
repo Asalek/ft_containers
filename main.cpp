@@ -216,6 +216,8 @@ int main()
 		ft::map<char, int> map2;
 		ft::map<char, int>::iterator it;	//main map
 		ft::map<char, int>::iterator it2;	//map to copy too it
+		// ft::map<char, int>::reverse_iterator rit;
+		// ft::map<char, int>::reverse_iterator rit2;
 		ft::pair<ft::map<char,int>::iterator,bool> ret;//find iterator
 
 
@@ -238,6 +240,7 @@ int main()
 
 		it = map4.begin();
 		it2 = map4.end();
+		map4['a'] = 99;		//test overload operator[]
 		while (it != it2)	//check the copy has the same value as main map
 		{
 			it2--;

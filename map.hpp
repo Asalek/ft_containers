@@ -47,8 +47,8 @@ namespace ft
 			typedef typename ft::RedBlackTree<value_type, value_compare, allocator_type> tree;
 			typedef typename ft::node<value_type>										node;
 			typedef node*																node_pointer;
-			typedef ft::tree_iterator<node_pointer, value_type>										iterator;
-			typedef ft::tree_iterator<node_pointer, const value_type>								citerator;
+			typedef ft::tree_iterator<node_pointer, value_type>							iterator;
+			typedef ft::tree_iterator<node_pointer, const value_type>					citerator;
 			typedef std::ptrdiff_t														difference_type;
 			typedef size_t																size_type;
 			typedef typename ft::reverse_iterator<iterator>								reverse_iterator;
@@ -91,6 +91,13 @@ namespace ft
 					insert(b, e);
 				}
 				return *this;
+			}
+			mapped_type	&operator[](const key_type &k)
+			{
+				iterator found = this->find(k);
+				if (found != _tree.nil())
+					return ((*found).second);
+				return (*((this->insert(ft::make_pair(k,mapped_type()))).first)).second;
 			}
 			void	clear() { this->_tree.clear(); }
 			

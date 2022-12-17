@@ -2,6 +2,7 @@
 #include "stack.hpp"
 #include "map.hpp"
 #include <vector>
+#include "set.hpp"
 
 using namespace ft;
 
@@ -338,5 +339,40 @@ int main()
 			}
 			map.print();
 		}
-	}	
+	}
+	//				****************************
+	//						  丂乇ㄒ
+	//				****************************
+	cout <<"\n"<<"▁▂▄▅▆▇█ ᏕᏋᏖ █▇▆▅▄▂▁"<< endl << endl;
+	{
+		ft::set<int> set;
+		ft::set<int>::iterator it;
+		ft::set<int>::iterator it2;
+
+		for (size_t i = 1; i < 15; i++)
+		{
+			set.insert(i);
+		}
+		it = set.begin();
+		it2 = set.end();
+		cout << "Read stored data in set :\n";
+		while (it != it2)
+		{
+			cout << *it << ", ";
+			it++;
+		}
+		cout << "\nErase number 9 and redisplay :\n";
+		set.erase(9);
+		
+		it = set.begin();
+		it2 = set.end();
+
+		while (it != it2)
+		{
+			cout << *it << ", ";
+			it++;
+		}
+		cout << "\nprint schema to set Data :\n";
+		set.print();
+	}
 }

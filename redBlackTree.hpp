@@ -52,20 +52,21 @@ namespace ft
 				return nodeCreated;
 			}
 		public:
-		RedBlackTree(): root(nullptr), end(nullptr), _comp(), size(0)
-		{
-			end = this->makenode();
-			NIL = this->makenode();
-			NIL->left = nullptr;
-			NIL->right = nullptr;
-			NIL->parent = nullptr;
-			NIL->color = BLACK;
-			end = NIL;
-			root = NIL;
-		}
+		// RedBlackTree(): root(nullptr), end(nullptr), _comp(), size(0)
+		// {
+		// 	end = this->makenode();
+		// 	NIL = this->makenode();
+		// 	NIL->left = nullptr;
+		// 	NIL->right = nullptr;
+		// 	NIL->parent = nullptr;
+		// 	NIL->color = BLACK;
+		// 	end = NIL;
+		// 	root = NIL;
+		// }
 		RedBlackTree(value_compare _comp, allocator_type _alloc): _alloc(_alloc), root(nullptr), end(),  _comp(_comp), size(0), NIL(nullptr)
 		{
 			end = this->makenode();
+			// root = this->makenode();
 			// NIL = this->makenode();
 			// NIL->left = nullptr;
 			// NIL->right = nullptr;
@@ -382,7 +383,7 @@ namespace ft
 				_alloc.destroy(Del);
 				_alloc.deallocate(Del, 1);
 			}
-			if (originalColor == BLACK)// && x != nullptr)
+			if (originalColor == BLACK && x != nullptr)
 				erase_fixup(x);
 			// if (root != nullptr)
 			// {

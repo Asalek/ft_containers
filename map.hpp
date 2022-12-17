@@ -112,7 +112,7 @@ namespace ft
 			}
 			void	clear() { this->_tree.clear(); }
 			
-			iterator begin() { return iterator(_tree.begin_node()); }
+			iterator begin() { return iterator(_tree.begin_node(), _tree.nil()); }
 			
 			citerator begin() const { return citerator(_tree.begin_node()); }
 			
@@ -250,6 +250,10 @@ namespace ft
 				iterator low = lower_bound(k);
 				iterator up = upper_bound(k);
 				return (ft::make_pair(this->lower_bound(k), this->upper_bound(k)));
+			}
+			void print()
+			{
+				_tree.printTree();
 			}
 	};
 }

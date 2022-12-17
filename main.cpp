@@ -308,5 +308,35 @@ int main()
 
 		cout << "upper bound points to: ";
 		cout << eq.second->first << " => " << eq.second->second << '\n';
+
+		{
+			cout << "ERASE TEST : \n";
+			ft::map<int, int> map;
+			for (size_t i = 1; i < 11; i++)
+			{
+				map.insert(ft::pair<int, int>(i, i*10));
+			}
+			ft::map<int, int>::iterator		itb;
+			ft::map<int, int>::iterator		ite;
+
+			itb = map.begin();
+			ite = map.end();
+			while (itb != ite)
+			{
+				cout << "first : " << (*itb).first << ", second : " << (*itb).second << endl;
+				++itb;
+			}
+			map.print();
+			map.erase(8);
+			
+			itb = map.begin();
+			ite = map.end();
+			while (itb != ite)
+			{
+				cout << "first : " << (*itb).first << ", second : " << (*itb).second << endl;
+				++itb;
+			}
+			map.print();
+		}
 	}	
 }

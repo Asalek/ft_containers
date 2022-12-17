@@ -124,10 +124,39 @@ namespace ft
 				printHelper(nodee->right, indent, true);
         	}
 		}
+		void printset(node_pointer nodee, string indent, bool last) {
+		    if (nodee != NIL)
+			{
+				cout << indent;
+				if (last) {
+					cout << "R----";
+					indent += "   ";
+				} else {
+					cout << "L----";
+					indent += "|  ";
+				}
+
+				string sColor;
+				//  = nodee->color ? "RED" : "BLACK";
+				if (nodee->color == RED)
+					sColor = "RED";
+				else
+					sColor = "BLACK";
+				cout << nodee->data << "(" << sColor << ")" << endl;
+				printset(nodee->left, indent, false);
+				printset(nodee->right, indent, true);
+        	}
+		}
 		void printTree()
 		{
 			if (root) {
 				printHelper(this->root, "", true);
+			}
+		}
+		void printSetTree()
+		{
+			if (root) {
+				printset(this->root, "", true);
 			}
 		}
 		node_pointer	find(const value_type &data) const

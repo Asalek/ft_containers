@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/12/18 15:19:17 by asalek           ###   ########.fr       */
+/*   Updated: 2022/12/18 18:11:25 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ namespace ft
 	//Reverse Iterator
 
 	template<typename Type>
-	class reverse_iterator : public std::iterator<std::bidirectional_iterator_tag, Type>, iterator_traits<Type>
+	class reverse_iterator : public std::iterator<std::bidirectional_iterator_tag, Type>, std::iterator_traits<Type>
 	{
 		private:
 			Type *_ptr;

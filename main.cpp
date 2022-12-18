@@ -217,8 +217,7 @@ int main()
 		ft::map<char, int> map2;
 		ft::map<char, int>::iterator it;	//main map
 		ft::map<char, int>::iterator it2;	//map to copy too it
-		// ft::map<char, int>::reverse_iterator rit;
-		// ft::map<char, int>::reverse_iterator rit2;
+		ft::map<char, int>::reverse_iterator rit;
 		ft::pair<ft::map<char,int>::iterator,bool> ret;//find iterator
 
 
@@ -374,5 +373,17 @@ int main()
 		}
 		cout << "\nprint schema to set Data :\n";
 		set.print();
+	}
+	cout << "\npair operators Test : \n";
+	{
+		ft::pair<int,char> foo (11,'a');
+		ft::pair<int,char> bar (11,'z');
+
+		if (foo==bar) std::cout << "foo and bar are equal\n";
+		if (foo!=bar) std::cout << "foo and bar are not equal\n";
+		if (foo< bar) std::cout << "foo is less than bar\n";
+		if (foo> bar) std::cout << "foo is greater than bar\n";
+		if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
+		if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
 	}
 }

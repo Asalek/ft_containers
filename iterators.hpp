@@ -6,7 +6,7 @@
 /*   By: asalek <asalek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 23:35:27 by asalek            #+#    #+#             */
-/*   Updated: 2022/12/16 22:28:24 by asalek           ###   ########.fr       */
+/*   Updated: 2022/12/18 15:19:17 by asalek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,9 +211,13 @@ namespace ft
 		public:
 			tree_iterator():_current(nullptr) {}
 			tree_iterator(Iter x) : _current(x){}
+			
 			tree_iterator(Iter c, Iter n) : _current(c), _nil(n){}
-			tree_iterator(const tree_iterator &other) : _current(other._current) {}
-			tree_iterator &operator=(const tree_iterator &other)
+			template <class X, class Y>
+			tree_iterator(const tree_iterator<X, Y> &other) : _current(other.base()) {}
+			
+			template <class X, class Y>
+			tree_iterator &operator=(const tree_iterator<X, Y> &other)
 			{
 				this->_current = other.base();
 				return *this;

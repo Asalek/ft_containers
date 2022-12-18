@@ -63,7 +63,7 @@ namespace ft
 		// 	end = NIL;
 		// 	root = NIL;
 		// }
-		RedBlackTree(value_compare _comp, allocator_type _alloc): _alloc(_alloc), root(nullptr), end(),  _comp(_comp), size(0), NIL(nullptr)
+		RedBlackTree(value_compare _comp, allocator_type _alloc): _alloc(_alloc), root(nullptr), end(), NIL(nullptr), _comp(_comp), size(0)
 		{
 			end = this->makenode();
 			// root = this->makenode();

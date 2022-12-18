@@ -277,7 +277,7 @@ int main()
 		}
 		//test count :
 		int i = map4.count('c');
-		cout << "\ncount test :		"<< endl;
+		cout << "\ncount test :		" << i << endl;
 		char c;
 		for (c='c'; c<='g'; c++)
 		{

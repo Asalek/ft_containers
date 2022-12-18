@@ -247,8 +247,6 @@ namespace ft
 			}
 			pair<iterator,iterator> equal_range (const key_type& k)
 			{
-				iterator low = lower_bound(k);
-				iterator up = upper_bound(k);
 				return (ft::make_pair(this->lower_bound(k), this->upper_bound(k)));
 			}
 			void print()
